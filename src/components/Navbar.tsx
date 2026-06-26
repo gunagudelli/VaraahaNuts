@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import logo from '../assets/ChatGPT Image Jun 19, 2026, 04_46_58 PM.png';
 import { ShoppingCart, Heart, Search, Menu, X, ArrowRight, Phone } from 'lucide-react';
@@ -26,7 +26,6 @@ const Navbar: React.FC = () => {
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', (cur) => {
-    const prev = scrollY.getPrevious() ?? 0;
     setScrolled(cur > 10);
     setHidden(false);
   });

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { ArrowRight, Award, Truck, Star, ShieldCheck, Zap, Lock, Leaf, ChevronRight } from 'lucide-react';
+import { ArrowRight, Award, Truck, Star, ShieldCheck, Zap, Leaf, ChevronRight } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import { products, testimonials } from '../data/products';
 import PageTransition from '../components/PageTransition';
@@ -16,10 +16,6 @@ const GOLD  = '#D4A017';
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 50 },
   show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
-};
-const fadeLeft: Variants = {
-  hidden: { opacity: 0, x: -60 },
-  show:   { opacity: 1, x: 0,  transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 const fadeRight: Variants = {
   hidden: { opacity: 0, x: 60 },

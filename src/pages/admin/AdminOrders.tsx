@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, ChevronDown, ShoppingBag } from 'lucide-react';
+import { Search, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   C, PageHeader, SearchInput, StatusBadge,

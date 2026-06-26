@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Search, X, SlidersHorizontal, Package, ChevronDown } from 'lucide-react';
+import { Search, X, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
 import { products } from '../data/products';
@@ -15,11 +15,6 @@ const SORT_OPTIONS = [
   { value: 'price-desc', label: 'Price: High → Low' },
   { value: 'rating',     label: 'Top Rated' },
 ];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
-};
 
 const Shop: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();

@@ -4,7 +4,7 @@ import {
   ArrowUp, ArrowDown, Clock, CheckCircle2, Truck, AlertCircle,
   TrendingUp, Star, Zap, Activity, ChevronRight,
 } from 'lucide-react';
-import { motion, useInView, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { products } from '../../data/products';
 import logo from '../../assets/WhatsApp Image 2026-06-16 at 1.36.56 PM.jpeg';
 import { C, Reveal, AnimCounter, ProgressBar } from './adminUI';
@@ -50,7 +50,7 @@ const DonutRing: React.FC<{ pct: number; color: string; r: number; delay: number
   const inView = useInView(ref, { once: true });
   const circ = 2 * Math.PI * r;
   return (
-    <g ref={ref as React.RefObject<SVGGElement>}>
+    <g ref={ref as unknown as React.RefObject<SVGGElement>}>
       <circle cx="56" cy="56" r={r} fill="none" stroke="#EDE5D8" strokeWidth="5.5" />
       <motion.circle
         cx="56" cy="56" r={r} fill="none" stroke={color} strokeWidth="5.5"

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { categories } from '../data/products';
+import type { Category } from '../types/index';
 import PageTransition from '../components/PageTransition';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
@@ -16,7 +17,7 @@ const Categories: React.FC = () => (
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((cat, i) => (
+          {categories.map((cat: Category, i: number) => (
             <motion.div
               key={cat.id}
               initial={{ opacity: 0, y: 20 }}

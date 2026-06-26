@@ -4,7 +4,6 @@ import type { Product } from '../types';
 const P2    = '/p2.jpg';
 const P4    = '/p4.jpg';
 const P5    = '/p5.jpg';
-const P11   = '/p11.jpg';
 const PHERO = '/phero.jpg';
 const PEXELS = 'https://images.pexels.com/photos/18876240/pexels-photo-18876240.jpeg';
 
@@ -78,6 +77,13 @@ export const products: Product[] = [
   },
 
 
+];
+
+export const categories = [
+  { id: 'cat-1', name: 'Premium Cashews', slug: 'premium-cashews', image: '/p4.jpg', productCount: products.filter(p => p.category === 'premium-cashews').length },
+  { id: 'cat-2', name: 'Bulk Cashews',   slug: 'bulk-cashews',   image: '/p2.jpg', productCount: products.filter(p => p.category === 'bulk-cashews').length },
+  { id: 'cat-3', name: 'Flavored Cashews', slug: 'flavored-cashews', image: '/p5.jpg', productCount: products.filter(p => p.category === 'flavored-cashews').length },
+  { id: 'cat-4', name: 'Gift Packs',     slug: 'gift-packs',     image: '/p11.jpg', productCount: products.filter(p => p.category === 'gift-packs').length },
 ];
 
 export const testimonials = [

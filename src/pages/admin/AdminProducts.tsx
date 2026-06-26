@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { products as initialProducts } from '../../data/products';
 import type { Product } from '../../types';
 import {
-  C, Reveal, PageHeader, PrimaryBtn, IconBtn,
+  C, PageHeader, PrimaryBtn, IconBtn,
   SearchInput, StatusBadge, TableWrap, THead, TRow,
   FormField, Modal,
 } from './adminUI';

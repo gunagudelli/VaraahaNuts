@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle2, Send } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, CheckCircle2, Send } from 'lucide-react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 

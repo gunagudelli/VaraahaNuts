@@ -29,8 +29,8 @@ const SidebarContent: React.FC<{ close?: () => void }> = ({ close }) => {
               whileHover={{ scale: 1.08, rotate: 3 }}
               transition={{ type: 'spring', stiffness: 320 }}
               className="w-9 h-9 rounded-xl overflow-hidden ring-2"
-              style={{ ringColor: C.gold + '40' }}
             >
+
               <img src={logo} alt="Varaaha" className="w-full h-full object-cover" />
             </motion.div>
             <div>
@@ -220,8 +220,8 @@ const AdminLayout: React.FC = () => {
             {/* Avatar */}
             <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2.5 cursor-default">
               <div
-                className="w-8 h-8 rounded-xl overflow-hidden ring-2"
-                style={{ ringColor: C.gold + '40', outline: `2px solid ${C.gold}35`, outlineOffset: 1 }}
+                className="w-8 h-8 rounded-xl overflow-hidden"
+                style={{ outline: `2px solid ${C.gold}35`, outlineOffset: '1px' }}
               >
                 <img src={logo} alt="Admin" className="w-full h-full object-cover" />
               </div>

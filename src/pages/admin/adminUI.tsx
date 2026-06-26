@@ -48,7 +48,7 @@ export const scaleIn = {
 };
 export const modalVariants = {
   hidden: { opacity: 0, scale: 0.94, y: 12 },
-  show:   { opacity: 1, scale: 1, y: 0, transition: { duration: 0.3, ease: [0.34, 1.56, 0.64, 1] } },
+  show:   { opacity: 1, scale: 1, y: 0, transition: { duration: 0.3, ease: [0.34, 1.56, 0.64, 1] as [number, number, number, number] } },
   exit:   { opacity: 0, scale: 0.96, y: 8, transition: { duration: 0.2 } },
 };
 
@@ -177,10 +177,7 @@ export const Card: React.FC<{ children: React.ReactNode; className?: string; hov
 export const SearchInput: React.FC<{ value: string; onChange: (v: string) => void; placeholder?: string; icon?: React.ReactNode }> = ({
   value, onChange, placeholder = 'Search…', icon,
 }) => (
-  <motion.div
-    whileFocusWithin={{ boxShadow: `0 0 0 3px ${C.gold}30` }}
-    className="relative rounded-xl overflow-hidden"
-  >
+  <div className="relative rounded-xl overflow-hidden">
     {icon && <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#7A6A56]">{icon}</span>}
     <input
       value={value}
@@ -191,7 +188,7 @@ export const SearchInput: React.FC<{ value: string; onChange: (v: string) => voi
       onFocus={e => (e.target.style.borderColor = C.gold)}
       onBlur={e => (e.target.style.borderColor = C.border)}
     />
-  </motion.div>
+  </div>
 );
 
 /* ── Status badge ── */
