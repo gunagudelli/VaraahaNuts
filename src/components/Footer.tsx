@@ -166,7 +166,13 @@ const Footer: React.FC = () => (
     <div className="relative border-t" style={{ borderColor: `${GREEN}50` }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
         <p className="text-xs" style={{ color: '#4A6A4A' }}>
-          © {new Date().getFullYear()}Varaaha Cashew Processing. All rights reserved.
+          © {new Date().getFullYear()} Varaaha Cashew Processing. All rights reserved.
+        </p>
+        <p className="text-xs" style={{ color: '#4A6A4A' }}>
+          Developed by{' '}
+          <a href="tel:+918978455447" className="font-semibold hover:opacity-80 transition-opacity" style={{ color: GOLD }}>
+            Guna · +91 89784 55447
+          </a>
         </p>
         <div className="flex items-center gap-4">
           {[['Privacy Policy', '/privacy'], ['Terms & Conditions', '/terms']].map(([label, to]) => (
