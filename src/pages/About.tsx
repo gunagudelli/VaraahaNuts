@@ -6,6 +6,7 @@ import {
   MapPin, Zap, ArrowRight, CheckCircle2,
 } from 'lucide-react';
 import PageTransition from '../components/PageTransition';
+import heroBg from '../assets/cashew-bg.png';
 
 const GREEN = '#0B5D3B';
 const GOLD  = '#D4A017';
@@ -72,8 +73,14 @@ const About: React.FC = () => (
       {/* ── Hero ── */}
       <section
         className="relative overflow-hidden py-16 sm:py-20"
-        style={{ background: `linear-gradient(135deg, ${GREEN} 0%, #0d7a4e 55%, #1a9160 100%)` }}
+        style={{
+          backgroundImage: `url(${heroBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
       >
+        <div className="absolute inset-0" style={{ background: 'rgba(7,31,20,0.72)' }} />
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-10 blur-3xl" style={{ background: GOLD }} />
           <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-8 blur-3xl" style={{ background: '#fff' }} />
@@ -105,7 +112,7 @@ const About: React.FC = () => (
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight"
           >
-            Sri Varaaha<br />
+            Varaaha<br />
             <span style={{ color: GOLD }}>Cashew Processing</span>
           </motion.h1>
           <motion.p
@@ -171,7 +178,7 @@ const About: React.FC = () => (
               </Reveal>
               <div className="space-y-4">
                 {[
-                  'Sri Varaaha Cashew Processing is a premier cashew processing unit based out of Narsipatnam, Visakhapatnam District, Andhra Pradesh — driven by a commitment to excellence in processing and supplying top-grade, natural cashew nuts.',
+                  'Varaaha Cashew Processing is a premier cashew processing unit based out of Narsipatnam, Visakhapatnam District, Andhra Pradesh — driven by a commitment to excellence in processing and supplying top-grade, natural cashew nuts.',
                   'Equipped with advanced boiling, cutting, and grading machinery, every cashew is processed under the highest hygienic standards — FSSAI compliant, without artificial preservatives.',
                   'We take pride in being a reliable, long-term B2B partner capable of fulfilling bulk requirements while maintaining consistent quality.',
                 ].map((p, i) => (

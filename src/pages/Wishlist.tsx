@@ -39,7 +39,7 @@ const Wishlist: React.FC = () => {
                     transition={{ delay: i * 0.06 }}
                     className="bg-white rounded-2xl border border-[#F0E6D3] overflow-hidden hover:shadow-md transition-shadow"
                   >
-                    <div className="relative aspect-square bg-[#F5EDD8]">
+                    <div className="relative aspect-[4/3] bg-[#F5EDD8]">
                       <Link to={`/product/${item.product.slug}`}>
                         <img src={item.product.image} alt={item.product.name} className="w-full h-full object-cover hover:scale-105 transition-transform duration-400" />
                       </Link>

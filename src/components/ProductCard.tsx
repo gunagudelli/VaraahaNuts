@@ -8,6 +8,16 @@ import { useStore } from '../context/StoreContext';
 const GREEN = '#0B5D3B';
 const GOLD  = '#D4A017';
 
+const IMG_BG_COLORS = [
+  '#E8F5E9', // soft green
+  '#FFF8E1', // soft amber
+  '#E3F2FD', // soft blue
+  '#FCE4EC', // soft pink
+  '#F3E5F5', // soft purple
+  '#E0F7FA', // soft teal
+  '#FBE9E7', // soft deep orange
+];
+
 interface Props { product: Product; index?: number; }
 
 const ProductCard: React.FC<Props> = ({ product, index = 0 }) => {
@@ -42,20 +52,19 @@ const ProductCard: React.FC<Props> = ({ product, index = 0 }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.06, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="group relative bg-white rounded-3xl overflow-hidden flex flex-col"
+      className="group relative rounded-3xl overflow-hidden flex flex-col"
       style={{
-        border: '1px solid #EDE5D8',
-        boxShadow: '0 2px 12px rgba(11,93,59,0.04)',
-        transition: 'box-shadow 0.3s, border-color 0.3s',
+        background: '#FBF7F0',
+        border: '2px solid #EDE5D8',
+        transition: 'border-color 0.3s',
       }}
       whileHover={{
-        y: -6,
-        boxShadow: `0 20px 48px rgba(11,93,59,0.12)`,
-        borderColor: '#D4C4A8',
+        y: -4,
+        borderColor: GREEN,
       }}
     >
       {/* ── Image ── */}
-      <div className="relative overflow-hidden bg-[#F8F5EF]" style={{ aspectRatio: '4/3' }}>
+      <div className="relative overflow-hidden" style={{ aspectRatio: '4/3', background: IMG_BG_COLORS[index % IMG_BG_COLORS.length] }}>
         <Link to={`/product/${product.slug}`}>
           <motion.img
             src={product.image} alt={product.name}
@@ -157,7 +166,7 @@ const ProductCard: React.FC<Props> = ({ product, index = 0 }) => {
       </div>
 
       {/* ── Info ── */}
-      <div className="p-3.5 flex flex-col flex-1 gap-1">
+      <div className="p-3.5 flex flex-col flex-1 gap-1" style={{ background: '#FBF7F0' }}>
         {/* Category */}
         <span className="text-[10px] uppercase tracking-widest font-bold" style={{ color: GOLD }}>
           {product.category.replace(/-/g, ' ')}

@@ -1,95 +1,96 @@
 import type { Product } from '../types';
 
-// All images downloaded locally from Pexels/Pixabay — cashew & nuts only
-const P2    = '/p2.jpg';
-const P4    = '/p4.jpg';
-const P5    = '/p5.jpg';
-const PHERO = '/phero.jpg';
-const PEXELS = 'https://images.pexels.com/photos/18876240/pexels-photo-18876240.jpeg';
-
-// WhatsApp real product photos
-import WA1 from '../assets/WhatsApp Image 2026-06-16 at 1.36.56 PM.jpeg';
-import WA2 from '../assets/WhatsApp Image 2026-06-16 at 1.37.26 PM.jpeg';
-import WA3 from '../assets/WhatsApp Image 2026-06-16 at 1.37.26 PM (1).jpeg';
-
-export const CHERO = PHERO;
+import IMG_250G  from '../assets/ChatGPT Image Jun 26, 2026, 06_34_42 PM.png';
+import IMG_750G  from '../assets/ChatGPT Image Jun 26, 2026, 06_35_58 PM.png';
+import IMG_1KG   from '../assets/ChatGPT Image Jun 26, 2026, 06_21_21 PM.png';
+import IMG_2KG   from '../assets/ChatGPT Image Jun 26, 2026, 06_31_20 PM.png';
+import IMG_3KG   from '../assets/ChatGPT Image Jun 26, 2026, 06_40_37 PM.png';
+import IMG_5KG   from '../assets/ChatGPT Image Jun 26, 2026, 06_36_22 PM.png';
+import IMG_10KG  from '../assets/ChatGPT Image Jun 26, 2026, 06_42_10 PM.png';
 
 export const products: Product[] = [
 
   {
-    id: '1', name: 'Varaaha W180 King Cashews', slug: 'w180-king-cashews',
-    category: 'premium-cashews', price: 1099, originalPrice: 1299, weight: '500g',
-    image: WA2, images: [WA2, WA3, P4],
+    id: '1', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-250g',
+    category: 'premium-cashews', price: 299, originalPrice: 349, weight: '250g',
+    image: IMG_250G, images: [IMG_250G, IMG_750G, IMG_1KG],
     rating: 4.8, reviewCount: 156, inStock: true, isFeatured: true, isBestSeller: true,
-    description: 'W180 — King of Cashews / Super Jumbo. The largest, highest-grade premium cashews, perfect for luxury gifting and high-end retail. Hand-selected for size, shape, and freshness directly from our AP facility.',
-    benefits: ['Largest Grade', 'Hand Selected', 'Farm Direct', 'Zero Additives'],
+    description: 'Premium quality cashews, hand-selected and hygienically packed. Perfect for daily snacking and gifting.',
+    benefits: ['Hand Selected', 'Farm Direct', 'Zero Additives', 'FSSAI Certified'],
     tags: ['premium'],
   },
 
   {
-    id: '2', name: 'Varaaha W240 Jumbo Whole Cashews', slug: 'w240-jumbo-whole-cashews',
-    category: 'premium-cashews', price: 899, originalPrice: 1099, weight: '500g',
-    image: WA3, images: [WA3, WA2, P4],
+    id: '2', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-750g',
+    category: 'premium-cashews', price: 749, originalPrice: 899, weight: '750g',
+    image: IMG_750G, images: [IMG_750G, IMG_250G, IMG_1KG],
     rating: 4.8, reviewCount: 124, inStock: true, isFeatured: true, isBestSeller: true,
-    description: 'W240 — Jumbo Whole. Highly sought-after large wholes, widely preferred for premium sweets, bakeries, and festive packs. Hygienically processed at our FSSAI-certified facility in Narsipatnam.',
-    benefits: ['Jumbo Size', 'Bakery Grade', 'Festive Ready', 'FSSAI Certified'],
+    description: 'Premium quality cashews, hand-selected and hygienically packed. Perfect for daily snacking and gifting.',
+    benefits: ['Hand Selected', 'Farm Direct', 'Zero Additives', 'FSSAI Certified'],
     tags: ['premium'],
   },
 
   {
-    id: '3', name: 'Varaaha W320 Standard Whole Cashews', slug: 'w320-standard-whole-cashews',
-    category: 'premium-cashews', price: 749, originalPrice: 899, weight: '500g',
-    image: WA1, images: [WA1, WA2, P4],
+    id: '3', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-1kg',
+    category: 'premium-cashews', price: 999, originalPrice: 1199, weight: '1kg',
+    image: IMG_1KG, images: [IMG_1KG, IMG_750G, IMG_2KG],
     rating: 4.7, reviewCount: 210, inStock: true, isFeatured: true, isBestSeller: true,
-    description: 'W320 — Standard Whole. The most popular and globally demanded standard-sized wholes, ideal for daily consumption and culinary use. Fresh, natural, and zero preservatives.',
+    description: 'Premium quality cashews, hand-selected and hygienically packed. Perfect for daily snacking and gifting.',
     benefits: ['Most Popular', 'Daily Use', 'Culinary Grade', 'Natural Fresh'],
     tags: ['premium'],
   },
 
   {
-    id: '4', name: 'Varaaha Pieces & Splits', slug: 'cashew-pieces-splits',
-    category: 'bulk-cashews', price: 499, originalPrice: 649, weight: '500g',
-    image: P4, images: [P4, WA1, P2],
-    rating: 4.6, reviewCount: 87, inStock: true, isBestSeller: true,
-    description: 'Processed Pieces & Splits (JH · K · LWP · SWP) — carefully graded broken cashews tailored for commercial kitchens, sweet manufacturing units, and catering services. Best value bulk option.',
-    benefits: ['Best Value', 'Commercial Grade', 'JH·K·LWP·SWP', 'Bulk Ready'],
+    id: '4', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-2kg',
+    category: 'bulk-cashews', price: 1899, originalPrice: 2299, weight: '2kg',
+    image: IMG_2KG, images: [IMG_2KG, IMG_1KG, IMG_3KG],
+    rating: 4.7, reviewCount: 87, inStock: true, isBestSeller: true,
+    description: 'Bulk pack premium cashews ideal for families, commercial kitchens, and catering services. Best value for larger quantities.',
+    benefits: ['Best Value', 'Bulk Pack', 'Family Size', 'Fresh & Natural'],
     tags: ['bulk', 'value'],
   },
 
   {
-    id: '5', name: 'Varaaha Peri Peri Spiced Cashews', slug: 'peri-peri-spiced-cashews',
-    category: 'flavored-cashews', price: 749, originalPrice: 899, weight: '200g',
-    image: PEXELS, images: [PEXELS, WA1, P4],
-    rating: 4.6, reviewCount: 98, inStock: true, isFeatured: true,
-    description: 'A fiery peri peri spice blend coats our premium cashews for a bold, adventurous snacking experience. Made with natural spices, zero artificial flavours.',
-    benefits: ['Bold Flavour', 'Natural Spices', 'Real Chillies', 'Exciting Taste'],
-    tags: ['flavored', 'spicy'],
+    id: '5', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-3kg',
+    category: 'bulk-cashews', price: 2799, originalPrice: 3399, weight: '3kg',
+    image: IMG_3KG, images: [IMG_3KG, IMG_2KG, IMG_5KG],
+    rating: 4.6, reviewCount: 65, inStock: true, isFeatured: true,
+    description: 'Bulk pack premium cashews ideal for families, commercial kitchens, and catering services.',
+    benefits: ['Bulk Value', 'Commercial Grade', 'Fresh Pack', 'Zero Preservatives'],
+    tags: ['bulk'],
   },
 
   {
-    id: '6', name: 'Varaaha Premium Cashew Gift Pack', slug: 'premium-cashew-gift-pack',
-    category: 'gift-packs', price: 1199, originalPrice: 1499, weight: '500g',
-    image: P5, images: [P5, P2],
+    id: '6', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-5kg',
+    category: 'bulk-cashews', price: 4599, originalPrice: 5499, weight: '5kg',
+    image: IMG_5KG, images: [IMG_5KG, IMG_3KG, IMG_10KG],
     rating: 4.8, reviewCount: 43, inStock: true,
-    description: 'An elegant gift pack with premium cashew variants — W180 & W240. Perfect for birthdays, anniversaries, Diwali, and corporate gifting. Custom branding available for bulk orders.',
-    benefits: ['2 Variants', 'Elegant Box', 'Festive Ready', 'Custom Branding'],
-    tags: ['gift'],
+    description: 'Large bulk pack for businesses, sweet shops, and caterers. Freshly processed and hygienically sealed.',
+    benefits: ['Business Pack', 'Sweet Shops', 'Caterers', 'Hygienically Sealed'],
+    tags: ['bulk', 'wholesale'],
   },
 
+  {
+    id: '7', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-10kg',
+    category: 'bulk-cashews', price: 8999, originalPrice: 10999, weight: '10kg',
+    image: IMG_10KG, images: [IMG_10KG, IMG_5KG, IMG_3KG],
+    rating: 4.9, reviewCount: 31, inStock: true,
+    description: 'Wholesale 10kg pack for factories, large catering units, and corporate gifting. Best pricing for high-volume buyers.',
+    benefits: ['Wholesale Price', 'Factory Grade', 'Bulk Order', 'Corporate Ready'],
+    tags: ['bulk', 'wholesale'],
+  },
 
 ];
 
 export const categories = [
-  { id: 'cat-1', name: 'Premium Cashews', slug: 'premium-cashews', image: '/p4.jpg', productCount: products.filter(p => p.category === 'premium-cashews').length },
-  { id: 'cat-2', name: 'Bulk Cashews',   slug: 'bulk-cashews',   image: '/p2.jpg', productCount: products.filter(p => p.category === 'bulk-cashews').length },
-  { id: 'cat-3', name: 'Flavored Cashews', slug: 'flavored-cashews', image: '/p5.jpg', productCount: products.filter(p => p.category === 'flavored-cashews').length },
-  { id: 'cat-4', name: 'Gift Packs',     slug: 'gift-packs',     image: '/p11.jpg', productCount: products.filter(p => p.category === 'gift-packs').length },
+  { id: 'cat-1', name: 'Premium Cashews', slug: 'premium-cashews', image: IMG_1KG,  productCount: products.filter(p => p.category === 'premium-cashews').length },
+  { id: 'cat-2', name: 'Bulk Cashews',   slug: 'bulk-cashews',   image: IMG_5KG,  productCount: products.filter(p => p.category === 'bulk-cashews').length },
 ];
 
 export const testimonials = [
-  { id: '1', name: 'Priya Sharma',  location: 'Hyderabad', rating: 5, comment: 'Absolutely love the quality! The W240 cashews are the best I have ever tasted. Packaging is premium and delivery was super fast.', avatar: 'PS' },
+  { id: '1', name: 'Priya Sharma',  location: 'Hyderabad', rating: 5, comment: 'Absolutely love the quality! The cashews are the best I have ever tasted. Packaging is premium and delivery was super fast.', avatar: 'PS' },
   { id: '2', name: 'Rajesh Kumar',  location: 'Bangalore', rating: 5, comment: 'Ordered cashew gift boxes for Diwali and everyone loved them. The cashews were so fresh and beautifully packaged!', avatar: 'RK' },
-  { id: '3', name: 'Anitha Reddy',  location: 'Chennai',   rating: 5, comment: 'Peri Peri cashews are incredibly addictive! The spice level is perfect and only natural spices are used. Great brand!', avatar: 'AR' },
+  { id: '3', name: 'Anitha Reddy',  location: 'Chennai',   rating: 5, comment: 'The 1kg pack is perfect for our family. So fresh and natural — you can taste the difference from store-bought!', avatar: 'AR' },
   { id: '4', name: 'Mohammed Ali',  location: 'Mumbai',    rating: 4, comment: 'Bulk cashew order for our office was handled professionally. Great pricing, fresh product, and excellent service.', avatar: 'MA' },
   { id: '5', name: 'Deepa Nair',    location: 'Kochi',     rating: 5, comment: 'Farm fresh cashew quality is unmatched. You can literally taste the difference. Will never go back to supermarket cashews!', avatar: 'DN' },
 ];
@@ -103,3 +104,5 @@ export const faqs = [
   { q: 'What is your return policy?',             a: 'We offer a 7-day freshness guarantee. If you are not satisfied with cashew quality, we will replace or refund.' },
   { q: 'Do you offer corporate cashew gifting?',  a: 'Absolutely! We create custom-branded cashew gift boxes for corporate events and festivals. Contact us for pricing.' },
 ];
+
+export const CHERO = IMG_1KG;

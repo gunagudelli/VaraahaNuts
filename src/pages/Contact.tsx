@@ -104,8 +104,8 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setSending(true);
     setTimeout(() => {
-      const text = `Hello Sri Varaaha Cashew Processing!%0AName: ${encodeURIComponent(form.name)}%0ASubject: ${encodeURIComponent(form.subject)}%0AMessage: ${encodeURIComponent(form.message)}`;
-      window.open(`https://wa.me/918978455447?text=${text}`, '_blank');
+      const text = `Hello Varaaha Cashew Processing!%0AName: ${encodeURIComponent(form.name)}%0ASubject: ${encodeURIComponent(form.subject)}%0AMessage: ${encodeURIComponent(form.message)}`;
+      window.open(`https://wa.me/919704671552?text=${text}`, '_blank');
       setForm({ name: '', subject: '', message: '' });
       setSending(false);
       setSent(true);
@@ -155,7 +155,7 @@ const Contact: React.FC = () => {
             {/* ── Left — Info ── */}
             <div className="space-y-3">
               <InfoCard icon={MapPin} label="Address" color={GREEN} delay={0}>
-                <p className="text-sm font-semibold text-[#1a1a1a]">Sri Varaaha Cashew Processing</p>
+                <p className="text-sm font-semibold text-[#1a1a1a]">Varaaha Cashew Processing</p>
                 <p className="text-xs text-[#777] mt-0.5 leading-relaxed">
                   Kusarlapudi Village, Narsipatnam<br />
                   Visakhapatnam District, Andhra Pradesh
@@ -171,8 +171,8 @@ const Contact: React.FC = () => {
               </InfoCard>
 
               <InfoCard icon={Phone} label="Phone" color="#6366f1" delay={0.07}>
-                <a href="tel:+918978455447" className="text-sm font-bold text-[#1a1a1a] hover:text-[#6366f1] transition-colors">
-                  +91 89784 55447
+                <a href="tel:+919704671552" className="text-sm font-bold text-[#1a1a1a] hover:text-[#6366f1] transition-colors">
+                  +91 97046 71552
                 </a>
                 <p className="text-xs text-[#999] mt-0.5">Mon–Sat · 9:00 AM – 6:00 PM</p>
               </InfoCard>
@@ -193,7 +193,7 @@ const Contact: React.FC = () => {
               {/* WhatsApp CTA */}
               <Reveal delay={0.28}>
                 <motion.a
-                  href="https://wa.me/918978455447?text=Hello%20Sri%20Varaaha%20Cashew%20Processing!%20I%20would%20like%20to%20enquire%20about%20your%20products."
+                  href="https://wa.me/919704671552?text=Hello%20Sri%20Varaaha%20Cashew%20Processing!%20I%20would%20like%20to%20enquire%20about%20your%20products."
                   target="_blank" rel="noreferrer"
                   whileHover={{ scale: 1.03, boxShadow: `0 12px 32px ${WA}30` }}
                   whileTap={{ scale: 0.97 }}
@@ -315,7 +315,7 @@ const Contact: React.FC = () => {
                     style={{ border: 0 }}
                     allowFullScreen loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Sri Varaaha Cashew Processing Location"
+                    title="Varaaha Cashew Processing Location"
                   />
                 </motion.div>
               </Reveal>

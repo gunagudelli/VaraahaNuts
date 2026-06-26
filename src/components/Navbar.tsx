@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
           <Link to="/" className="shrink-0">
             <motion.img
               src={logo} alt="Varaaha Cashews"
-              className="h-14 w-auto object-contain"
+              className="h-20 w-auto object-contain"
               whileHover={{ scale: 1.04 }}
               transition={{ type: 'spring', stiffness: 300 }}
             />
@@ -199,7 +199,7 @@ const Navbar: React.FC = () => {
               style={{ background: '#fff', boxShadow: '-8px 0 40px rgba(0,0,0,0.12)' }}
             >
               <div className="flex items-center justify-between p-5 border-b" style={{ borderColor: '#e8e2d6' }}>
-                <img src={logo} alt="Varaaha Cashews" className="h-10 w-auto object-contain" />
+                <img src={logo} alt="Varaaha Cashews" className="h-14 w-auto object-contain" />
                 <motion.button
                   whileHover={{ scale: 1.1, rotate: 90 }} whileTap={{ scale: 0.9 }}
                   transition={{ type: 'spring', stiffness: 300 }}

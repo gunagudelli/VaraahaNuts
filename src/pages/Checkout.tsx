@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useStore } from '../context/StoreContext';
 import PageTransition from '../components/PageTransition';
 
-const WHATSAPP = '918978455447';
+const WHATSAPP = '919704671552';
 
 type Form = {
   name: string; phone: string; email: string;
@@ -74,7 +74,7 @@ const Checkout: React.FC = () => {
   const [form, setForm] = useState<Form>({ name: '', phone: '', email: '', address: '', city: '', state: '', pincode: '' });
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof Form, boolean>>>({});
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState<string | false>(false);
   const [pincodeLoading, setPincodeLoading] = useState(false);
   const [pincodeError, setPincodeError] = useState('');
 
@@ -139,9 +139,10 @@ const Checkout: React.FC = () => {
       `${form.address}, ${form.city}, ${form.state} - ${form.pincode}%0A%0A` +
       `Order Time: ${dateStr}`;
 
-    setSuccess(true);
+    const waUrl = `https://wa.me/${WHATSAPP}?text=${msg}`;
+    setSuccess(waUrl);
     clearCart();
-    setTimeout(() => { window.location.href = `https://web.whatsapp.com/send?phone=${WHATSAPP}&text=${msg}`; }, 1500);
+    window.open(waUrl, '_blank');
   };
 
   const isValid = Object.keys(validate(form)).length === 0;
@@ -153,10 +154,15 @@ const Checkout: React.FC = () => {
           <CheckCircle size={44} className="text-green-500" />
         </div>
         <h2 className="text-2xl font-bold text-[#1C1014] mb-2">Order Confirmed!</h2>
-        <p className="text-[#7A6A6E] text-sm mb-6">Redirecting to WhatsApp to complete your order...</p>
-        <div className="flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-lg text-sm font-medium">
-          <MessageCircle size={16} /> Opening WhatsApp...
-        </div>
+        <p className="text-[#7A6A6E] text-sm mb-6">Click the button below to complete your order on WhatsApp.</p>
+        <a
+          href={success}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center justify-center gap-2 px-6 py-3 bg-[#25D366] text-white rounded-lg text-sm font-semibold hover:bg-[#1ebe5d] transition-colors"
+        >
+          <MessageCircle size={16} /> Open WhatsApp to Confirm Order
+        </a>
         <Link to="/" className="block mt-4 text-sm text-[#8B1A2F] hover:underline">← Back to Home</Link>
       </motion.div>
     </div>

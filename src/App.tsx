@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -34,12 +34,20 @@ const StorefrontLayout: React.FC<{ children: React.ReactNode }> = ({ children })
   </>
 );
 
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+};
+
 const App: React.FC = () => {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
 
   return (
-    <AnimatePresence mode="wait">
+    <>
+      <ScrollToTop />
+      <AnimatePresence mode="wait">
       {isAdmin ? (
         <Routes location={location} key="admin">
           <Route path="/admin" element={<AdminLayout />}>
@@ -71,6 +79,7 @@ const App: React.FC = () => {
         </StorefrontLayout>
       )}
     </AnimatePresence>
+    </>
   );
 };
 

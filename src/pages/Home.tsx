@@ -9,6 +9,7 @@ import PageTransition from '../components/PageTransition';
 import heroImg   from '../assets/ChatGPT Image Jun 17, 2026, 04_18_18 PM.png';
 import bulkVideo from '../assets/WhatsApp Video 2026-06-16 at 1.37.27 PM.mp4';
 import bgVideo   from '../assets/14666827_1080_1920_30fps.mp4';
+import bsBg      from '../assets/ChatGPT Image Jun 26, 2026, 05_48_04 PM.png';
 
 const GREEN = '#0B5D3B';
 const GOLD  = '#D4A017';
@@ -149,21 +150,82 @@ const Home: React.FC = () => {
       </section>
 
       {/* ── Best Sellers ─────────────────────────────────────── */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 relative overflow-hidden" style={{ background: `linear-gradient(160deg, #FDFAF4 0%, #F5EBDD 60%, #FDFAF4 100%)`, backgroundImage: `url(${bsBg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+        {/* Overlay for readability */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(253,250,244,0.82)' }} />
+        {/* Animated background blobs */}
+        <motion.div
+          animate={{ scale: [1, 1.15, 1], opacity: [0.08, 0.14, 0.08] }}
+          transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
+          className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #a78bfa 0%, transparent 70%)', filter: 'blur(60px)' }}
+        />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.07, 0.12, 0.07] }}
+          transition={{ repeat: Infinity, duration: 9, ease: 'easeInOut', delay: 2 }}
+          className="absolute -bottom-32 -right-32 w-[560px] h-[560px] rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #fb923c 0%, transparent 70%)', filter: 'blur(70px)' }}
+        />
+        <motion.div
+          animate={{ y: [0, -20, 0], opacity: [0.06, 0.10, 0.06] }}
+          transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut', delay: 1 }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #34d399 0%, transparent 70%)', filter: 'blur(55px)' }}
+        />
+        {/* Floating cashew shapes */}
+        {[
+          { top: '8%',  left: '6%',   scale: 1,    dur: 4,   delay: 0,   rotate: 20  },
+          { top: '65%', left: '4%',   scale: 0.7,  dur: 5,   delay: 1,   rotate: -15 },
+          { top: '15%', right: '5%',  scale: 0.85, dur: 4.5, delay: 0.5, rotate: 140 },
+          { top: '70%', right: '6%',  scale: 1.1,  dur: 6,   delay: 1.5, rotate: -40 },
+          { top: '40%', left: '2%',   scale: 0.6,  dur: 3.5, delay: 2,   rotate: 80  },
+          { top: '35%', right: '3%',  scale: 0.75, dur: 5.5, delay: 0.8, rotate: 200 },
+        ].map((d, i) => (
+          <motion.div
+            key={i}
+            className="absolute pointer-events-none"
+            style={{ top: d.top, left: (d as {left?:string}).left, right: (d as {right?:string}).right, opacity: 0.18 }}
+            animate={{ y: [0, -16, 0], rotate: [d.rotate, d.rotate + 12, d.rotate] }}
+            transition={{ repeat: Infinity, duration: d.dur, ease: 'easeInOut', delay: d.delay }}
+          >
+            <svg width={48 * d.scale} height={48 * d.scale} viewBox="0 0 64 64" fill="none">
+              <path
+                d="M12 48 C8 36, 6 24, 14 16 C22 8, 36 8, 46 16 C56 24, 58 38, 50 48 C44 55, 32 58, 22 54 C14 51, 10 52, 12 48 Z"
+                fill={i % 2 === 0 ? GREEN : GOLD}
+                opacity="0.9"
+              />
+              <path
+                d="M20 44 C18 36, 17 26, 22 20 C28 13, 38 13, 44 20 C50 27, 50 38, 44 44"
+                stroke="white" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.4"
+              />
+            </svg>
+          </motion.div>
+        ))}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="flex items-end justify-between mb-10">
+            className="flex items-end justify-between mb-12">
             <div>
-              <motion.p variants={fadeUp} className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: GOLD }}>Top Picks</motion.p>
-              <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl font-bold text-[#1a1a1a]">Best Seller Products</motion.h2>
+              <motion.p variants={fadeUp} className="text-xs font-semibold uppercase tracking-[0.22em] mb-2" style={{ color: GOLD }}>Top Picks</motion.p>
+              <motion.h2 variants={fadeUp} className="text-2xl sm:text-4xl font-bold text-[#1a1a1a] leading-tight">
+                Best Seller <span style={{ color: GREEN }}>Products</span>
+              </motion.h2>
+              <motion.div variants={fadeUp} className="mt-3 flex items-center gap-2">
+                <div className="h-1 w-10 rounded-full" style={{ background: GREEN }} />
+                <div className="h-1 w-4 rounded-full" style={{ background: GOLD }} />
+                <div className="h-1 w-2 rounded-full" style={{ background: GREEN, opacity: 0.4 }} />
+              </motion.div>
             </div>
             <motion.div variants={fadeUp}>
-              <Link to="/shop" className="hidden sm:flex items-center gap-1 text-sm font-medium hover:gap-2 transition-all" style={{ color: GREEN }}>
+              <Link
+                to="/shop"
+                className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border-2 hover:opacity-80 transition-all"
+                style={{ borderColor: GREEN, color: GREEN }}
+              >
                 View All <ChevronRight size={15} />
               </Link>
             </motion.div>
           </motion.div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
             {(bestSellers.length ? bestSellers : featuredProducts).map((p, i) =>
               <ProductCard key={p.id} product={p} index={i} />)}
           </div>
@@ -314,7 +376,7 @@ const Home: React.FC = () => {
 
       {/* ── WhatsApp Float ───────────────────────────────────── */}
       <motion.a
-        href="https://wa.me/918978455447?text=Hello Varaaha Cashews! I would like to know more about your products."
+        href="https://wa.me/919704671552?text=Hello Varaaha Cashews! I would like to know more about your products."
         target="_blank" rel="noreferrer"
         className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-xl"
         animate={{ y: [0, -6, 0] }}

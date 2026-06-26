@@ -35,7 +35,7 @@ const Terms: React.FC = () => (
             <p>We offer a 7-day freshness guarantee. If the product quality does not meet our standards, we will replace or refund. Opened products are generally non-refundable unless defective.</p>
           </Section>
           <Section title="6. Intellectual Property">
-            <p>All content on this website — including logos, images, and text — is the property of Sri Varaaha Cashew Processing and may not be used without written permission.</p>
+            <p>All content on this website — including logos, images, and text — is the property of Varaaha Cashew Processing and may not be used without written permission.</p>
           </Section>
         </div>
       </div>

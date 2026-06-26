@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import newLogo from '../assets/Jun 19, 2026, 03_55_08 PM.png';
+import footerBg from '../assets/cashew-bg.png';
 
 const GREEN = '#0B5D3B';
 const GOLD  = '#D4A017';
@@ -18,7 +19,7 @@ const socialLinks = [
         <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.428a.75.75 0 00.916.916l5.569-1.476A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.696 9.696 0 01-4.964-1.365l-.356-.211-3.684.976.976-3.587-.232-.371A9.696 9.696 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
       </svg>
     ),
-    href: 'https://wa.me/918978455447',
+    href: 'https://wa.me/919704671552',
     title: 'WhatsApp',
   },
 ];
@@ -39,7 +40,8 @@ const FooterLink: React.FC<{ to: string; children: React.ReactNode }> = ({ to, c
 );
 
 const Footer: React.FC = () => (
-  <footer className="relative overflow-hidden" style={{ background: '#071F14' }}>
+  <footer className="relative overflow-hidden" style={{ background: '#071F14', backgroundImage: `url(${footerBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(7,31,20,0.88)' }} />
     {/* Subtle top gradient */}
     <div
       className="absolute inset-x-0 top-0 h-px"
@@ -128,8 +130,8 @@ const Footer: React.FC = () => (
             </li>
             <li className="flex gap-2.5 items-center">
               <Phone size={13} className="shrink-0" style={{ color: GOLD }} />
-              <a href="tel:+918978455447" className="text-xs text-[#9AB49A] hover:text-[#D4A017] transition-colors">
-                +91 89784 55447
+              <a href="tel:+919704671552" className="text-xs text-[#9AB49A] hover:text-[#D4A017] transition-colors">
+                +91 97046 71552
               </a>
             </li>
             <li className="flex gap-2.5 items-center">
@@ -142,7 +144,7 @@ const Footer: React.FC = () => (
 
           {/* WhatsApp pill */}
           <motion.a
-            href="https://wa.me/918978455447"
+            href="https://wa.me/919704671552"
             target="_blank" rel="noreferrer"
             whileHover={{ scale: 1.04, boxShadow: '0 6px 20px rgba(37,211,102,0.28)' }}
             whileTap={{ scale: 0.97 }}
@@ -164,7 +166,7 @@ const Footer: React.FC = () => (
     <div className="relative border-t" style={{ borderColor: `${GREEN}50` }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
         <p className="text-xs" style={{ color: '#4A6A4A' }}>
-          © {new Date().getFullYear()} Sri Varaaha Cashew Processing. All rights reserved.
+          © {new Date().getFullYear()}Varaaha Cashew Processing. All rights reserved.
         </p>
         <div className="flex items-center gap-4">
           {[['Privacy Policy', '/privacy'], ['Terms & Conditions', '/terms']].map(([label, to]) => (
