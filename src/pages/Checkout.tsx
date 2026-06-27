@@ -84,7 +84,7 @@ interface FieldProps {
 }
 
 const Field: React.FC<FieldProps> = ({
-  name, label, type = 'text', full, placeholder,
+  name: _name, label, type = 'text', full, placeholder,
   value, error, touched, readOnly, suffix, prefix, onChange, onBlur,
 }) => (
   <div className={full ? 'col-span-1 sm:col-span-2' : ''}>
@@ -305,13 +305,16 @@ const Checkout: React.FC = () => {
       <div className="pt-[68px] min-h-screen" style={{ background: '#FDFAF4' }}>
 
         {/* ── Header ── */}
-        <div className="bg-white" style={{ borderBottom: '1px solid #EDE5D8' }}>
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] mb-1.5 hidden lg:block" style={{ color: GOLD }}>
+        <div className="relative overflow-hidden py-8 sm:py-10"
+          style={{ background: `linear-gradient(135deg, ${GREEN} 0%, #0d7a4e 60%, #1a9160 100%)` }}>
+          <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-10 blur-3xl" style={{ background: GOLD }} />
+          <div className="absolute -bottom-8 -left-8 w-36 h-36 rounded-full opacity-10 blur-3xl" style={{ background: '#fff' }} />
+          <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] mb-1.5" style={{ color: GOLD }}>
               Your Order
             </p>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a1a]">Checkout</h1>
-            <p className="text-sm text-[#888] mt-0.5">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white">Checkout</h1>
+            <p className="text-sm mt-0.5" style={{ color: 'rgba(255,255,255,0.65)' }}>
               {cart.length} item{cart.length !== 1 ? 's' : ''} ready to dispatch
             </p>
           </div>

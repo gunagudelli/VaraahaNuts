@@ -5,6 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../context/StoreContext';
 import PageTransition from '../components/PageTransition';
 
+const GREEN = '#0B5D3B';
+const GOLD  = '#D4A017';
+
 const Cart: React.FC = () => {
   const { cart, removeFromCart, updateQuantity, cartTotal } = useStore();
   const shipping = cartTotal >= 999 ? 0 : 79;
@@ -12,11 +15,17 @@ const Cart: React.FC = () => {
 
   return (
     <PageTransition>
-      <div className="pt-16 min-h-screen bg-[#FDFAF4]">
-        <div className="bg-white border-b border-[#F0E6D3]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#2C2416]">Shopping Cart</h1>
-            <p className="text-sm text-[#7A6A56] mt-1">{cart.length} item{cart.length !== 1 ? 's' : ''}</p>
+      <div className="pt-[68px] min-h-screen bg-[#FDFAF4]">
+        <div className="relative overflow-hidden py-8 sm:py-10"
+          style={{ background: `linear-gradient(135deg, ${GREEN} 0%, #0d7a4e 60%, #1a9160 100%)` }}>
+          <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-10 blur-3xl" style={{ background: GOLD }} />
+          <div className="absolute -bottom-8 -left-8 w-36 h-36 rounded-full opacity-10 blur-3xl" style={{ background: '#fff' }} />
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] mb-1.5" style={{ color: GOLD }}>Your Cart</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-white">Shopping Cart</h1>
+            <p className="text-sm mt-0.5" style={{ color: 'rgba(255,255,255,0.65)' }}>
+              {cart.length} item{cart.length !== 1 ? 's' : ''}
+            </p>
           </div>
         </div>
 

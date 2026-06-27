@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ShoppingCart, Heart, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Product } from '../types';
@@ -22,7 +22,6 @@ interface Props { product: Product; index?: number; }
 
 const ProductCard: React.FC<Props> = ({ product, index = 0 }) => {
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useStore();
-  const navigate = useNavigate();
   const inWishlist = isInWishlist(product.id);
   const discount   = product.originalPrice
     ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
@@ -33,12 +32,6 @@ const ProductCard: React.FC<Props> = ({ product, index = 0 }) => {
     addToCart(product);
     setAdded(true);
     setTimeout(() => setAdded(false), 1600);
-  };
-
-  const handleBuyNow = (e: React.MouseEvent) => {
-    e.preventDefault();
-    addToCart(product);
-    navigate('/checkout');
   };
 
   const handleWishlist = (e: React.MouseEvent) => {
