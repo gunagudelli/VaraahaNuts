@@ -32,9 +32,15 @@ const Shop: React.FC = () => {
   }, [searchParams]);
 
   const filtered = useMemo(() => {
-    let list = [...products];
+    // Show only first variant per category (1kg)
+    const seen = new Set<string>();
+    let list = products.filter(p => {
+      if (seen.has(p.category)) return false;
+      seen.add(p.category);
+      return true;
+    });
     if (search) list = list.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) || p.description.toLowerCase().includes(search.toLowerCase()));
-    if (sort === 'price-asc') list.sort((a, b) => a.price - b.price);
+    if (sort === 'price-asc')  list.sort((a, b) => a.price - b.price);
     else if (sort === 'price-desc') list.sort((a, b) => b.price - a.price);
     else if (sort === 'rating')     list.sort((a, b) => b.rating - a.rating);
     else list.sort((a, b) => b.reviewCount - a.reviewCount);

@@ -113,7 +113,14 @@ const TestimonialsCarousel: React.FC = () => {
 
 const Home: React.FC = () => {
   const featuredProducts = products.filter(p => p.isFeatured);
-  const bestSellers      = products.filter(p => p.isBestSeller);
+  const bestSellers = (() => {
+    const seen = new Set<string>();
+    return products
+      .filter(p => p.isBestSeller && p.category !== 'w180-cashews')
+      .filter(p => { if (seen.has(p.category)) return false; seen.add(p.category); return true; })
+      .slice(0, 3)
+      .concat(products.filter(p => p.slug === 'skin-cashews-1kg'));
+  })();
 
   const { scrollY } = useScroll();
   const heroImgY = useTransform(scrollY, [0, 400], [0, 40]);

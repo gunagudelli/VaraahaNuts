@@ -14,7 +14,6 @@ const ProductDetail: React.FC = () => {
   const product = products.find(p => p.slug === slug);
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useStore();
   const [qty, setQty] = useState(1);
-  const [activeImg, setActiveImg] = useState(0);
   const [added, setAdded] = useState(false);
   const inWishlist = product ? isInWishlist(product.id) : false;
 
@@ -26,7 +25,9 @@ const ProductDetail: React.FC = () => {
   );
 
   const images = product.images || [product.image];
-  const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+  const baseName = product.name.split(' —')[0];
+  const variants = products.filter(p => p.category === product.category && p.name.startsWith(baseName));
+  const related = variants.filter(p => p.id !== product.id);
   const discount = product.originalPrice ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
 
   const handleAddToCart = () => {
@@ -36,7 +37,7 @@ const ProductDetail: React.FC = () => {
   };
 
   return (
-    <PageTransition>
+    <PageTransition key={slug}>
       <div className="pt-16 bg-[#FDFAF4] min-h-screen">
         {/* Breadcrumb */}
         <div className="bg-white border-b border-[#F0E6D3]">
@@ -55,30 +56,17 @@ const ProductDetail: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-6 items-start">
             {/* Gallery */}
             <div>
-              <div className="rounded-2xl overflow-hidden bg-[#F5EDD8] mb-3">
+              <div className="rounded-2xl overflow-hidden bg-[#F5EDD8]" style={{ height: '320px' }}>
                 <motion.img
-                  key={activeImg}
+                  key={product.id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  src={images[activeImg]}
+                  src={product.image}
                   alt={product.name}
                   loading="eager"
-                  className="w-full h-auto object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              {images.length > 1 && (
-                <div className="flex gap-3">
-                  {images.map((img, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActiveImg(i)}
-                      className={`w-20 h-20 rounded-xl overflow-hidden border-2 transition-colors ${activeImg === i ? 'border-[#C9A84C]' : 'border-transparent'}`}
-                    >
-                    <img src={img} alt="" loading="lazy" className="w-full h-full object-cover" />
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
 
             {/* Info */}
@@ -113,9 +101,21 @@ const ProductDetail: React.FC = () => {
                 ))}
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-xs font-medium text-[#2C2416]">Weight:</span>
-                <span className="px-2.5 py-0.5 border-2 border-[#C9A84C] text-[#5C3D1E] text-xs font-semibold rounded-full bg-[#F5EDD8]">{product.weight}</span>
+                {variants.map(v => (
+                  <button
+                    key={v.id}
+                    onClick={() => navigate(`/product/${v.slug}`)}
+                    className={`px-3 py-1 border-2 text-xs font-semibold rounded-full transition-all ${
+                      v.id === product.id
+                        ? 'border-[#C9A84C] bg-[#F5EDD8] text-[#5C3D1E]'
+                        : 'border-[#E8D5B0] text-[#7A6A56] hover:border-[#C9A84C]'
+                    }`}
+                  >
+                    {v.weight}
+                  </button>
+                ))}
               </div>
 
               {/* Qty & Add */}

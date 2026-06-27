@@ -57,7 +57,7 @@ const ProductCard: React.FC<Props> = ({ product, index = 0 }) => {
         <Link to={`/product/${product.slug}`}>
           <motion.img
             src={product.image} alt={product.name}
-            className="w-full h-full object-contain p-2"
+            className="w-full h-full object-cover"
             loading="lazy"
             whileHover={{ scale: 1.06 }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
