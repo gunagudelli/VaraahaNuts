@@ -11,7 +11,7 @@ import IMG_10KG  from '../assets/ChatGPT Image Jun 26, 2026, 06_42_10 PM.png';
 export const products: Product[] = [
 
   {
-    id: '1', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-250g',
+    id: '1', name: 'Premium Cashews — 250g', slug: 'premium-cashews-250g',
     category: 'premium-cashews', price: 299, originalPrice: 349, weight: '250g',
     image: IMG_250G, images: [IMG_250G, IMG_750G, IMG_1KG],
     rating: 4.8, reviewCount: 156, inStock: true, isFeatured: true, isBestSeller: true,
@@ -21,7 +21,7 @@ export const products: Product[] = [
   },
 
   {
-    id: '2', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-750g',
+    id: '2', name: 'Premium Cashews — 750g', slug: 'premium-cashews-750g',
     category: 'premium-cashews', price: 749, originalPrice: 899, weight: '750g',
     image: IMG_750G, images: [IMG_750G, IMG_250G, IMG_1KG],
     rating: 4.8, reviewCount: 124, inStock: true, isFeatured: true, isBestSeller: true,
@@ -31,7 +31,7 @@ export const products: Product[] = [
   },
 
   {
-    id: '3', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-1kg',
+    id: '3', name: 'Premium Cashews — 1kg', slug: 'premium-cashews-1kg',
     category: 'premium-cashews', price: 999, originalPrice: 1199, weight: '1kg',
     image: IMG_1KG, images: [IMG_1KG, IMG_750G, IMG_2KG],
     rating: 4.7, reviewCount: 210, inStock: true, isFeatured: true, isBestSeller: true,
@@ -41,7 +41,7 @@ export const products: Product[] = [
   },
 
   {
-    id: '4', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-2kg',
+    id: '4', name: 'Bulk Cashews — 2kg', slug: 'premium-cashews-2kg',
     category: 'bulk-cashews', price: 1899, originalPrice: 2299, weight: '2kg',
     image: IMG_2KG, images: [IMG_2KG, IMG_1KG, IMG_3KG],
     rating: 4.7, reviewCount: 87, inStock: true, isBestSeller: true,
@@ -51,7 +51,7 @@ export const products: Product[] = [
   },
 
   {
-    id: '5', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-3kg',
+    id: '5', name: 'Bulk Cashews — 3kg', slug: 'premium-cashews-3kg',
     category: 'bulk-cashews', price: 2799, originalPrice: 3399, weight: '3kg',
     image: IMG_3KG, images: [IMG_3KG, IMG_2KG, IMG_5KG],
     rating: 4.6, reviewCount: 65, inStock: true, isFeatured: true,
@@ -61,7 +61,7 @@ export const products: Product[] = [
   },
 
   {
-    id: '6', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-5kg',
+    id: '6', name: 'Bulk Cashews — 5kg', slug: 'premium-cashews-5kg',
     category: 'bulk-cashews', price: 4599, originalPrice: 5499, weight: '5kg',
     image: IMG_5KG, images: [IMG_5KG, IMG_3KG, IMG_10KG],
     rating: 4.8, reviewCount: 43, inStock: true,
@@ -71,7 +71,7 @@ export const products: Product[] = [
   },
 
   {
-    id: '7', name: 'Varaaha Premium Cashews', slug: 'premium-cashews-10kg',
+    id: '7', name: 'Wholesale Cashews — 10kg', slug: 'premium-cashews-10kg',
     category: 'bulk-cashews', price: 8999, originalPrice: 10999, weight: '10kg',
     image: IMG_10KG, images: [IMG_10KG, IMG_5KG, IMG_3KG],
     rating: 4.9, reviewCount: 31, inStock: true,
@@ -88,11 +88,15 @@ export const categories = [
 ];
 
 export const testimonials = [
-  { id: '1', name: 'Priya Sharma',  location: 'Hyderabad', rating: 5, comment: 'Absolutely love the quality! The cashews are the best I have ever tasted. Packaging is premium and delivery was super fast.', avatar: 'PS' },
-  { id: '2', name: 'Rajesh Kumar',  location: 'Bangalore', rating: 5, comment: 'Ordered cashew gift boxes for Diwali and everyone loved them. The cashews were so fresh and beautifully packaged!', avatar: 'RK' },
-  { id: '3', name: 'Anitha Reddy',  location: 'Chennai',   rating: 5, comment: 'The 1kg pack is perfect for our family. So fresh and natural — you can taste the difference from store-bought!', avatar: 'AR' },
-  { id: '4', name: 'Mohammed Ali',  location: 'Mumbai',    rating: 4, comment: 'Bulk cashew order for our office was handled professionally. Great pricing, fresh product, and excellent service.', avatar: 'MA' },
-  { id: '5', name: 'Deepa Nair',    location: 'Kochi',     rating: 5, comment: 'Farm fresh cashew quality is unmatched. You can literally taste the difference. Will never go back to supermarket cashews!', avatar: 'DN' },
+  { id: '1', name: 'Rakesh',          location: 'Narsipatnam, Andhra Pradesh', rating: 5, comment: 'Absolutely love the quality! The cashews are the best I have ever tasted. Packaging is premium and delivery was super fast.', avatar: 'R' },
+  { id: '2', name: 'Guna',             location: 'Rajamundry, Andhra Pradesh',  rating: 5, comment: 'Ordered cashew gift boxes for Diwali and everyone loved them. The cashews were so fresh and beautifully packaged!', avatar: 'G' },
+  { id: '3', name: 'Anu Prashanath',   location: 'Bangalore',                   rating: 5, comment: 'The 1kg pack is perfect for our family. So fresh and natural — you can taste the difference from store-bought!', avatar: 'AP' },
+  { id: '4', name: 'Vijay',     location: 'Taminadu',                      rating: 4, comment: 'Bulk cashew order for our office was handled professionally. Great pricing, fresh product, and excellent service.', avatar: 'MA' },
+  { id: '5', name: 'Chinnabbai',       location: 'Mirthipadu, Andhra Pradesh',                       rating: 5, comment: 'Farm fresh cashew quality is unmatched. You can literally taste the difference. Will never go back to supermarket cashews!', avatar: 'DN' },
+  { id: '6', name: 'Sunil',            location: 'Kukatpally, Hyderabad',       rating: 5, comment: 'Ordered the 2kg bulk pack and it was worth every rupee. Super fresh, crunchy and natural taste. Highly recommended!', avatar: 'S' },
+  { id: '7', name: 'Guresh',           location: 'Miyapur, Hyderabad',          rating: 5, comment: 'Best cashews I have had in a long time. The quality is consistent and packaging is very hygienic. Will order again!', avatar: 'GU' },
+  { id: '8', name: 'Kuhite',           location: 'Nagpur, Mumbai',              rating: 4, comment: 'Great value for money. The cashews arrived fresh and well packed. Perfect for daily snacking and cooking.', avatar: 'K' },
+  { id: '9', name: 'Jay Rao',            location: 'Benz Circle, Vijayawada',     rating: 5, comment: 'Directly from AP farms — you can taste the freshness! Placed a bulk order for our shop and customers love it.', avatar: 'P' },
 ];
 
 export const faqs = [

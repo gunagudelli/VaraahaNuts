@@ -18,8 +18,7 @@ const navLinks = [
 const Navbar: React.FC = () => {
   const [mobileOpen,   setMobileOpen]   = useState(false);
   const [searchOpen,   setSearchOpen]   = useState(false);
-  const [scrolled,     setScrolled]     = useState(false);
-  const [hidden,       setHidden]       = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [searchQuery,  setSearchQuery]  = useState('');
   const { cartCount, wishlist } = useStore();
   const navigate = useNavigate();
@@ -27,7 +26,6 @@ const Navbar: React.FC = () => {
 
   useMotionValueEvent(scrollY, 'change', (cur) => {
     setScrolled(cur > 10);
-    setHidden(false);
   });
 
   const handleSearch = (e: React.FormEvent) => {
@@ -42,7 +40,7 @@ const Navbar: React.FC = () => {
   return (
     <>
       <motion.header
-        animate={{ y: hidden && !mobileOpen ? -100 : 0 }}
+        animate={{ y: 0 }}
         transition={{ duration: 0.36, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="fixed top-0 left-0 right-0 z-50"
         style={{

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import type { Variants } from 'framer-motion';
@@ -6,6 +6,7 @@ import { ArrowRight, Award, Truck, Star, ShieldCheck, Zap, Leaf, ChevronRight } 
 import ProductCard from '../components/ProductCard';
 import { products, testimonials } from '../data/products';
 import PageTransition from '../components/PageTransition';
+import { WHATSAPP_URL } from '../config';
 import heroImg   from '../assets/ChatGPT Image Jun 17, 2026, 04_18_18 PM.png';
 import bulkVideo from '../assets/WhatsApp Video 2026-06-16 at 1.37.27 PM.mp4';
 import bgVideo   from '../assets/14666827_1080_1920_30fps.mp4';
@@ -31,6 +32,85 @@ const scaleIn: Variants = {
   show:   { opacity: 1, scale: 1, transition: { duration: 0.5, ease: 'backOut' } },
 };
 
+const TestimonialsCarousel: React.FC = () => {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const total = testimonials.length;
+  const CARD_WIDTH = 340;
+  const GAP = 20;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActive(a => (a + 1) % total);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [total]);
+
+  useEffect(() => {
+    if (!trackRef.current) return;
+    const offset = active * (CARD_WIDTH + GAP);
+    trackRef.current.style.transform = `translateX(-${offset}px)`;
+  }, [active]);
+
+  return (
+    <div className="relative overflow-hidden px-4">
+      {/* Fade edges */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
+        style={{ background: 'linear-gradient(to right, #EDE0C8, transparent)' }} />
+      <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
+        style={{ background: 'linear-gradient(to left, #EDE0C8, transparent)' }} />
+
+      <div
+        ref={trackRef}
+        className="flex"
+        style={{ gap: GAP, transition: 'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)' }}
+      >
+        {testimonials.map((t, i) => (
+          <div
+            key={t.id}
+            className="shrink-0 p-6 rounded-2xl border border-[#D4B896] bg-[#FBF5EC] transition-all duration-300"
+            style={{
+              width: CARD_WIDTH,
+              opacity: i === active ? 1 : 0.5,
+              transform: i === active ? 'scale(1)' : 'scale(0.95)',
+              boxShadow: i === active ? '0 12px 32px rgba(0,0,0,0.1)' : 'none',
+            }}
+          >
+            <div className="flex mb-3">
+              {Array.from({ length: 5 }).map((_, j) => (
+                <Star key={j} size={13} style={{ fill: j < t.rating ? GOLD : '#ddd', color: j < t.rating ? GOLD : '#ddd' }} />
+              ))}
+            </div>
+            <p className="text-sm text-[#555] leading-relaxed mb-5">"{t.comment}"</p>
+            <div className="flex items-center gap-3">
+              <div>
+                <p className="text-xs font-bold text-[#1a1a1a]">{t.name}</p>
+                <p className="text-[11px] text-[#888]">{t.location}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Dots */}
+      <div className="flex justify-center gap-1.5 mt-6">
+        {testimonials.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: i === active ? 20 : 6,
+              height: 6,
+              background: i === active ? GREEN : '#D4C4A8',
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Home: React.FC = () => {
   const featuredProducts = products.filter(p => p.isFeatured);
   const bestSellers      = products.filter(p => p.isBestSeller);
@@ -42,7 +122,7 @@ const Home: React.FC = () => {
     <PageTransition>
 
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="grid lg:grid-cols-2 min-h-[580px] pt-14 overflow-hidden">
+      <section className="grid lg:grid-cols-2 min-h-[580px] pt-[68px] overflow-hidden">
 
         {/* Left */}
         <motion.div
@@ -150,7 +230,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* ── Best Sellers ─────────────────────────────────────── */}
-      <section className="py-20 relative overflow-hidden" style={{ background: `linear-gradient(160deg, #FDFAF4 0%, #F5EBDD 60%, #FDFAF4 100%)`, backgroundImage: `url(${bsBg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+      <section className="py-12 sm:py-20 relative overflow-hidden" style={{ background: `linear-gradient(160deg, #FDFAF4 0%, #F5EBDD 60%, #FDFAF4 100%)`, backgroundImage: `url(${bsBg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
         {/* Overlay for readability */}
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(253,250,244,0.82)' }} />
         {/* Animated background blobs */}
@@ -183,7 +263,7 @@ const Home: React.FC = () => {
         ].map((d, i) => (
           <motion.div
             key={i}
-            className="absolute pointer-events-none"
+            className="absolute pointer-events-none hidden sm:block"
             style={{ top: d.top, left: (d as {left?:string}).left, right: (d as {right?:string}).right, opacity: 0.18 }}
             animate={{ y: [0, -16, 0], rotate: [d.rotate, d.rotate + 12, d.rotate] }}
             transition={{ repeat: Infinity, duration: d.dur, ease: 'easeInOut', delay: d.delay }}
@@ -225,7 +305,7 @@ const Home: React.FC = () => {
               </Link>
             </motion.div>
           </motion.div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
             {(bestSellers.length ? bestSellers : featuredProducts).map((p, i) =>
               <ProductCard key={p.id} product={p} index={i} />)}
           </div>
@@ -317,8 +397,8 @@ const Home: React.FC = () => {
                   </Link>
                 </motion.div>
               </motion.div>
-              <div className="hidden lg:block relative overflow-hidden rounded-r-3xl">
-                <video src={bulkVideo} autoPlay muted loop playsInline className="w-full h-full object-cover min-h-[320px]" />
+              <div className="relative overflow-hidden rounded-b-3xl lg:rounded-r-3xl lg:rounded-bl-none">
+                <video src={bulkVideo} autoPlay muted loop playsInline className="w-full h-48 sm:h-64 lg:h-full object-cover lg:min-h-[320px]" />
                 <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#0B5D3B]/30" />
               </div>
             </div>
@@ -326,57 +406,23 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* ── Testimonials ─────────────────────────────────────── */}
-      <section className="py-16 bg-white">
+      {/* ── Testimonials carousel ───────────────────────────── */}
+      <section className="py-16 overflow-hidden" style={{ background: '#EDE0C8' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="text-center mb-10">
             <motion.p variants={fadeUp} className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: GOLD }}>Reviews</motion.p>
             <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl font-bold text-[#1a1a1a]">What Customers Say</motion.h2>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {testimonials.slice(0, 3).map((t, i) => (
-              <motion.div key={t.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                whileHover={{ y: -6, boxShadow: '0 16px 40px rgba(0,0,0,0.08)' }}
-                className="p-6 rounded-2xl border border-[#e8e2d6] bg-[#F8F5EF] transition-shadow cursor-default">
-                <div className="flex mb-3">
-                  {Array.from({ length: 5 }).map((_, j) => (
-                    <motion.div key={j}
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: i * 0.15 + j * 0.06 }}>
-                      <Star size={13} style={{ fill: j < t.rating ? GOLD : '#ddd', color: j < t.rating ? GOLD : '#ddd' }} />
-                    </motion.div>
-                  ))}
-                </div>
-                <p className="text-sm text-[#555] leading-relaxed mb-5">"{t.comment}"</p>
-                <div className="flex items-center gap-3">
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
-                    style={{ background: GREEN }}>
-                    {t.avatar}
-                  </motion.div>
-                  <div>
-                    <p className="text-xs font-bold text-[#1a1a1a]">{t.name}</p>
-                    <p className="text-[11px] text-[#888]">{t.location}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
+        <TestimonialsCarousel />
       </section>
 
 
 
       {/* ── WhatsApp Float ───────────────────────────────────── */}
       <motion.a
-        href="https://wa.me/919704671552?text=Hello Varaaha Cashews! I would like to know more about your products."
+        href={`${WHATSAPP_URL}?text=Hello Sri Varaaha Cashews! I would like to know more about your products.`}
         target="_blank" rel="noreferrer"
         className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-xl"
         animate={{ y: [0, -6, 0] }}

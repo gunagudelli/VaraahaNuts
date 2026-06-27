@@ -241,7 +241,7 @@ const Shop: React.FC = () => {
               </motion.div>
             ) : (
               <motion.div key="grid">
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                   {paginated.map((product, i) => (
                     <ProductCard key={product.id} product={product} index={i % perPage} />
                   ))}

@@ -55,14 +55,15 @@ const ProductDetail: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-6 items-start">
             {/* Gallery */}
             <div>
-              <div className="rounded-2xl overflow-hidden bg-[#F5EDD8] mb-3" style={{height: '280px'}}>
+              <div className="rounded-2xl overflow-hidden bg-[#F5EDD8] mb-3">
                 <motion.img
                   key={activeImg}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   src={images[activeImg]}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  loading="eager"
+                  className="w-full h-auto object-contain"
                 />
               </div>
               {images.length > 1 && (
@@ -73,7 +74,7 @@ const ProductDetail: React.FC = () => {
                       onClick={() => setActiveImg(i)}
                       className={`w-20 h-20 rounded-xl overflow-hidden border-2 transition-colors ${activeImg === i ? 'border-[#C9A84C]' : 'border-transparent'}`}
                     >
-                      <img src={img} alt="" className="w-full h-full object-cover" />
+                    <img src={img} alt="" loading="lazy" className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>

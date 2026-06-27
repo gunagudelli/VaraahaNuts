@@ -104,7 +104,7 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setSending(true);
     setTimeout(() => {
-      const text = `Hello Varaaha Cashew Processing!%0AName: ${encodeURIComponent(form.name)}%0ASubject: ${encodeURIComponent(form.subject)}%0AMessage: ${encodeURIComponent(form.message)}`;
+      const text = `Hello Sri Varaaha Cashew Processing!%0AName: ${encodeURIComponent(form.name)}%0ASubject: ${encodeURIComponent(form.subject)}%0AMessage: ${encodeURIComponent(form.message)}`;
       window.open(`https://wa.me/919704671552?text=${text}`, '_blank');
       setForm({ name: '', subject: '', message: '' });
       setSending(false);
@@ -155,7 +155,7 @@ const Contact: React.FC = () => {
             {/* ── Left — Info ── */}
             <div className="space-y-3">
               <InfoCard icon={MapPin} label="Address" color={GREEN} delay={0}>
-                <p className="text-sm font-semibold text-[#1a1a1a]">Varaaha Cashew Processing</p>
+                <p className="text-sm font-semibold text-[#1a1a1a]">Sri Varaaha Cashew Processing</p>
                 <p className="text-xs text-[#777] mt-0.5 leading-relaxed">
                   Kusarlapudi Village, Narsipatnam<br />
                   Visakhapatnam District, Andhra Pradesh

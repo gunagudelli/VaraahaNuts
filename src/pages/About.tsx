@@ -112,7 +112,7 @@ const About: React.FC = () => (
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight"
           >
-            Varaaha<br />
+            Sri Varaaha<br />
             <span style={{ color: GOLD }}>Cashew Processing</span>
           </motion.h1>
           <motion.p
@@ -178,7 +178,7 @@ const About: React.FC = () => (
               </Reveal>
               <div className="space-y-4">
                 {[
-                  'Varaaha Cashew Processing is a premier cashew processing unit based out of Narsipatnam, Visakhapatnam District, Andhra Pradesh — driven by a commitment to excellence in processing and supplying top-grade, natural cashew nuts.',
+                  'Sri Varaaha Cashew Processing is a premier cashew processing unit based out of Narsipatnam, Visakhapatnam District, Andhra Pradesh — driven by a commitment to excellence in processing and supplying top-grade, natural cashew nuts.',
                   'Equipped with advanced boiling, cutting, and grading machinery, every cashew is processed under the highest hygienic standards — FSSAI compliant, without artificial preservatives.',
                   'We take pride in being a reliable, long-term B2B partner capable of fulfilling bulk requirements while maintaining consistent quality.',
                 ].map((p, i) => (
