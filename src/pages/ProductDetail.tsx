@@ -24,7 +24,6 @@ const ProductDetail: React.FC = () => {
     </div>
   );
 
-  const images = product.images || [product.image];
   const baseName = product.name.split(' —')[0];
   const variants = products.filter(p => p.category === product.category && p.name.startsWith(baseName));
   const related = variants.filter(p => p.id !== product.id);
