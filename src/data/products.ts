@@ -26,7 +26,7 @@ export const products: Product[] = [
   },
   {
     id: '2', name: 'Avarage Wmix Cashews — 500g', slug: 'wmix-cashews-500g',
-    category: 'wmix-cashews', price: 400, originalPrice: 380, weight: '500g',
+    category: 'wmix-cashews', price: 380, originalPrice: 400, weight: '500g',
     image: IMG_WMIX, images: [IMG_WMIX, POUCH_500],
     rating: 4.5, reviewCount: 74, inStock: true,
     description: 'Premium quality Avarage Wmix Cashews with rich taste and natural freshness. Ideal for daily snacking, sweets, and cooking.',
@@ -35,7 +35,7 @@ export const products: Product[] = [
   },
   {
     id: '3', name: 'Avarage Wmix Cashews — 250g', slug: 'wmix-cashews-250g',
-    category: 'wmix-cashews', price: 250, originalPrice: 200, weight: '250g',
+    category: 'wmix-cashews', price: 200, originalPrice: 250, weight: '250g',
     image: IMG_WMIX, images: [IMG_WMIX, POUCH_250],
     rating: 4.5, reviewCount: 52, inStock: true,
     description: 'Premium quality Avarage Wmix Cashews with rich taste and natural freshness. Ideal for daily snacking, sweets, and cooking.',
@@ -55,7 +55,7 @@ export const products: Product[] = [
   },
   {
     id: '5', name: 'Split Cashews — 500g', slug: 'split-cashews-500g',
-    category: 'split-cashews', price: 400, originalPrice: 380, weight: '500g',
+    category: 'split-cashews', price: 380, originalPrice: 400, weight: '500g',
     image: IMG_JHSPLITS, images: [IMG_JHSPLITS, POUCH_500],
     rating: 4.4, reviewCount: 61, inStock: true,
     description: 'Economical split cashews perfect for curries, gravies, bakery items, and sweets.',
@@ -64,7 +64,7 @@ export const products: Product[] = [
   },
   {
     id: '6', name: 'Split Cashews — 250g', slug: 'split-cashews-250g',
-    category: 'split-cashews', price: 240, originalPrice: 200, weight: '250g',
+    category: 'split-cashews', price: 200, originalPrice: 240, weight: '250g',
     image: IMG_JHSPLITS, images: [IMG_JHSPLITS, POUCH_250],
     rating: 4.4, reviewCount: 39, inStock: true,
     description: 'Economical split cashews perfect for curries, gravies, bakery items, and sweets.',
@@ -151,7 +151,7 @@ export const products: Product[] = [
   },
   {
     id: '15', name: 'Kaju BB (Nooka) — 250g', slug: 'kaju-bb-nooka-250g',
-    category: 'kaju-bb', price: 70, originalPrice: 130, weight: '250g',
+    category: 'kaju-bb', price: 50, originalPrice: 130, weight: '250g',
     image: IMG_KAJUBB, images: [IMG_KAJUBB, POUCH_250],
     rating: 4.3, reviewCount: 36, inStock: true,
     description: 'Budget-friendly cashew variety for everyday consumption and recipes.',
@@ -171,7 +171,7 @@ export const products: Product[] = [
   },
   {
     id: '17', name: 'W180 Jumbo Cashew — 500g', slug: 'w180-jumbo-cashew-500g',
-    category: 'w180-cashews', price: 485, originalPrice: 485, weight: '500g',
+    category: 'w180-cashews', price: 860, originalPrice: 1000, weight: '500g',
     image: POUCH_500, images: [POUCH_500, W_500],
     rating: 4.9, reviewCount: 102, inStock: true, isFeatured: true,
     description: 'Large premium whole cashews with excellent taste and crunchy texture. Best for gifting and premium dry fruit packs.',
@@ -209,7 +209,7 @@ export const products: Product[] = [
   },
   {
     id: '21', name: 'W240 Super Cashew — 250g', slug: 'w240-super-cashew-250g',
-    category: 'w240-cashews', price: 250, originalPrice: 250, weight: '250g',
+    category: 'w240-cashews', price: 250, originalPrice: 400, weight: '250g',
     image: POUCH_250, images: [POUCH_250, W_250],
     rating: 4.8, reviewCount: 63, inStock: true,
     description: 'High-quality whole cashews with uniform size, ideal for snacks and festive occasions.',
@@ -238,7 +238,7 @@ export const products: Product[] = [
   },
   {
     id: '24', name: 'W320 Cashew — 250g', slug: 'w320-cashew-250g',
-    category: 'w320-cashews', price: 260, originalPrice: 260, weight: '250g',
+    category: 'w320-cashews', price: 260, originalPrice: 390, weight: '250g',
     image: POUCH_250, images: [POUCH_250, W_250],
     rating: 4.7, reviewCount: 98, inStock: true,
     description: 'Popular grade cashews offering premium quality at an affordable price for daily use.',
@@ -267,7 +267,7 @@ export const products: Product[] = [
   },
   {
     id: '27', name: 'Skin Cashews — 250g', slug: 'skin-cashews-250g',
-    category: 'skin-cashews', price: 250, originalPrice: 250, weight: '250g',
+    category: 'skin-cashews', price: 200, originalPrice: 400, weight: '250g',
     image: IMG_SKIN, images: [IMG_SKIN, POUCH_250],
     rating: 4.6, reviewCount: 34, inStock: true,
     description: 'Naturally processed skin-on cashews with authentic flavor and nutritional benefits.',
