@@ -113,14 +113,9 @@ const TestimonialsCarousel: React.FC = () => {
 
 const Home: React.FC = () => {
   const featuredProducts = products.filter(p => p.isFeatured);
-  const bestSellers = (() => {
-    const seen = new Set<string>();
-    return products
-      .filter(p => p.isBestSeller && p.category !== 'w180-cashews')
-      .filter(p => { if (seen.has(p.category)) return false; seen.add(p.category); return true; })
-      .slice(0, 3)
-      .concat(products.filter(p => p.slug === 'skin-cashews-1kg'));
-  })();
+  const bestSellers = products.filter(p =>
+    ['wmix-cashews-1kg', 'wmix-cashews-500g', 'wmix-cashews-250g'].includes(p.slug)
+  ).sort((a, b) => b.price - a.price);
 
   const { scrollY } = useScroll();
   const heroImgY = useTransform(scrollY, [0, 400], [0, 40]);
@@ -312,7 +307,7 @@ const Home: React.FC = () => {
               </Link>
             </motion.div>
           </motion.div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+          <div className="grid grid-cols-3 gap-5 sm:gap-8 max-w-3xl mx-auto">
             {(bestSellers.length ? bestSellers : featuredProducts).map((p, i) =>
               <ProductCard key={p.id} product={p} index={i} />)}
           </div>

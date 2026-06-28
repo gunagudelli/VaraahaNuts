@@ -19,6 +19,7 @@ const SORT_OPTIONS = [
 const Shop: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search,   setSearch]   = useState(searchParams.get('search')   || '');
+  const [weight,   setWeight]   = useState(searchParams.get('weight')   || '');
   const [sort,     setSort]     = useState(searchParams.get('sort')     || 'popular');
   const [page,     setPage]     = useState(1);
   const [sortOpen, setSortOpen] = useState(false);
@@ -32,20 +33,15 @@ const Shop: React.FC = () => {
   }, [searchParams]);
 
   const filtered = useMemo(() => {
-    // Show only first variant per category (1kg)
-    const seen = new Set<string>();
-    let list = products.filter(p => {
-      if (seen.has(p.category)) return false;
-      seen.add(p.category);
-      return true;
-    });
+    let list = [...products];
     if (search) list = list.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) || p.description.toLowerCase().includes(search.toLowerCase()));
+    if (weight) list = list.filter(p => p.weight === weight);
     if (sort === 'price-asc')  list.sort((a, b) => a.price - b.price);
     else if (sort === 'price-desc') list.sort((a, b) => b.price - a.price);
     else if (sort === 'rating')     list.sort((a, b) => b.rating - a.rating);
     else list.sort((a, b) => b.reviewCount - a.reviewCount);
     return list;
-  }, [search, sort]);
+  }, [search, weight, sort]);
 
   const paginated = filtered.slice(0, page * perPage);
   const hasMore   = paginated.length < filtered.length;
@@ -59,11 +55,12 @@ const Shop: React.FC = () => {
 
   const clearAll = () => {
     setSearch('');
+    setWeight('');
     setSearchParams(new URLSearchParams());
     setPage(1);
   };
 
-  const activeCount = [search].filter(Boolean).length;
+  const activeCount = [search, weight].filter(Boolean).length;
 
   return (
     <PageTransition>
@@ -128,6 +125,29 @@ const Shop: React.FC = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
+
+          {/* ── Weight Filter Buttons ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="flex gap-2 mb-5 flex-wrap"
+          >
+            {['', '1kg', '500g', '250g'].map(w => (
+              <button
+                key={w || 'all'}
+                onClick={() => { setWeight(w); updateFilter('weight', w); }}
+                className="px-4 py-2 rounded-full text-xs font-semibold border transition-all"
+                style={{
+                  background: weight === w ? GREEN : 'white',
+                  color: weight === w ? 'white' : '#555',
+                  borderColor: weight === w ? GREEN : '#EDE5D8',
+                  boxShadow: weight === w ? `0 4px 12px ${GREEN}30` : 'none',
+                }}
+              >
+                {w || 'All'}
+              </button>
+            ))}
+          </motion.div>
 
           {/* ── Toolbar ── */}
           <motion.div
