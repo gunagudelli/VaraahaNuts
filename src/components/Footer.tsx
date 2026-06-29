@@ -101,15 +101,19 @@ const Footer: React.FC = () => (
           <h4 className="text-white font-semibold mb-4 text-xs uppercase tracking-[0.18em]">Our Products</h4>
           <ul className="space-y-2.5">
             {[
-              'W180 King Cashews',
-              'W240 Jumbo Whole',
-              'W320 Standard',
-              'Pieces & Splits',
-              'Gift Packs',
-            ].map(label => (
-              <li key={label}>
+              ['W180 Jumbo Cashews',  'w180-cashews'],
+              ['W240 Super Cashews',  'w240-cashews'],
+              ['W320 Cashews',        'w320-cashews'],
+              ['Wmix Cashews',        'wmix-cashews'],
+              ['Split Cashews',       'split-cashews'],
+              ['4 Piece Cashews',     '4-piece-cashews'],
+              ['8 Piece Cashews',     '8-piece-cashews'],
+              ['Kaju BB (Nooka)',     'kaju-bb'],
+              ['Skin Cashews',        'skin-cashews'],
+            ].map(([label, slug]) => (
+              <li key={slug}>
                 <Link
-                  to="/shop"
+                  to={`/shop?category=${slug}`}
                   className="text-xs text-[#9AB49A] hover:text-[#D4A017] transition-colors duration-200"
                 >
                   {label}
