@@ -4,20 +4,20 @@ import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-// import Home from './pages/Home';
-// import Shop from './pages/Shop';
-// import ProductDetail from './pages/ProductDetail';
-// import Cart from './pages/Cart';
-// import Checkout from './pages/Checkout';
-// import Wishlist from './pages/Wishlist';
-// import About from './pages/About';
-// import Contact from './pages/Contact';
-// import Login from './pages/Login';
-// import Register from './pages/Register';
-// import FAQ from './pages/FAQ';
-// import Privacy from './pages/Privacy';
-// import Terms from './pages/Terms';
-// import NotFound from './pages/NotFound';
+import Home from './pages/Home';
+import Shop from './pages/Shop';
+import ProductDetail from './pages/ProductDetail';
+import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
+import Wishlist from './pages/Wishlist';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import FAQ from './pages/FAQ';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import NotFound from './pages/NotFound';
 
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -60,22 +60,22 @@ const App: React.FC = () => {
         </Routes>
       ) : (
         <StorefrontLayout>
-          <Routes location={location} key={location.pathname}>
-            {/* <Route path="/" element={<Home />} /> */}
-            {/* <Route path="/shop" element={<Shop />} />
-            <Route path="/product/:slug" element={<ProductDetail />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="*" element={<NotFound />} /> */}
-          </Routes>
+      <Routes location={location} key={location.pathname}>
+  <Route path="/" element={<Home />} />
+  <Route path="/shop" element={<Shop />} />
+  <Route path="/product/:slug" element={<ProductDetail />} />
+  <Route path="/cart" element={<Cart />} />
+  <Route path="/checkout" element={<Checkout />} />
+  <Route path="/wishlist" element={<Wishlist />} />
+  <Route path="/about" element={<About />} />
+  <Route path="/contact" element={<Contact />} />
+  <Route path="/login" element={<Login />} />
+  <Route path="/register" element={<Register />} />
+  <Route path="/faq" element={<FAQ />} />
+  <Route path="/privacy" element={<Privacy />} />
+  <Route path="/terms" element={<Terms />} />
+  <Route path="*" element={<NotFound />} />
+</Routes>
         </StorefrontLayout>
       )}
     </AnimatePresence>
