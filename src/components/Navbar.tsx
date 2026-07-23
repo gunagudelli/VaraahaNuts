@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import logo from '../assets/ChatGPT Image Jun 19, 2026, 04_46_58 PM.png';
+import logo from '../assets/ChatGPT Image Jun 19, 2026, 04_46_58 PM.webp';
 import { ShoppingCart, Heart, Search, Menu, X, ArrowRight, Phone } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { useStore } from '../context/StoreContext';

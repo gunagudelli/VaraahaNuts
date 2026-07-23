@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { PHONE_NUMBER, PHONE_DISPLAY, WHATSAPP_URL, EMAIL } from '../config';
-import newLogo from '../assets/Jun 19, 2026, 03_55_08 PM.png';
-import footerBg from '../assets/cashew-bg.png';
+import newLogo from '../assets/Jun 19, 2026, 03_55_08 PM.webp';
+import footerBg from '../assets/cashew-bg.webp';
 
 const GREEN = '#0B5D3B';
 const GOLD  = '#D4A017';

@@ -7,10 +7,10 @@ import ProductCard from '../components/ProductCard';
 import { products, testimonials } from '../data/products';
 import PageTransition from '../components/PageTransition';
 import { WHATSAPP_URL } from '../config';
-import heroImg   from '../assets/ChatGPT Image Jun 17, 2026, 04_18_18 PM.png';
+import heroImg   from '../assets/ChatGPT Image Jun 17, 2026, 04_18_18 PM.webp';
 import bulkVideo from '../assets/WhatsApp Video 2026-06-16 at 1.37.27 PM.mp4';
 import bgVideo   from '../assets/14666827_1080_1920_30fps.mp4';
-import bsBg      from '../assets/ChatGPT Image Jun 26, 2026, 05_48_04 PM.png';
+import bsBg      from '../assets/ChatGPT Image Jun 26, 2026, 05_48_04 PM.webp';
 
 const GREEN = '#0B5D3B';
 const GOLD  = '#D4A017';

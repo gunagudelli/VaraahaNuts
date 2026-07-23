@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Star, ShoppingCart, Heart, ChevronRight, Plus, Minus, Check, Truck, Shield, RefreshCw } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Star, ShoppingCart, Heart, ChevronRight, ChevronLeft, Plus, Minus, Check, Truck, Shield, RefreshCw } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { products } from '../data/products';
 import { useStore } from '../context/StoreContext';
 import ProductCard from '../components/ProductCard';
@@ -15,7 +15,9 @@ const ProductDetail: React.FC = () => {
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useStore();
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
+  const [imgIdx, setImgIdx] = useState(0);
   const inWishlist = product ? isInWishlist(product.id) : false;
+  const gallery = product?.images && product.images.length > 0 ? product.images : product ? [product.image] : [];
 
   if (!product) return (
     <div className="pt-24 text-center py-20">
@@ -55,16 +57,50 @@ const ProductDetail: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-6 items-start">
             {/* Gallery */}
             <div>
-              <div className="rounded-2xl overflow-hidden bg-[#F5EDD8]" style={{ height: '320px' }}>
-                <motion.img
-                  key={product.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  src={product.image}
-                  alt={product.name}
-                  loading="eager"
-                  className="w-full h-full object-cover"
-                />
+              <div className="relative rounded-2xl overflow-hidden bg-[#F5EDD8]" style={{ height: '320px' }}>
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={`${product.id}-${imgIdx}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    src={gallery[imgIdx]}
+                    alt={product.name}
+                    loading="eager"
+                    className="w-full h-full object-cover"
+                  />
+                </AnimatePresence>
+
+                {gallery.length > 1 && (
+                  <>
+                    <button
+                      onClick={() => setImgIdx(i => (i - 1 + gallery.length) % gallery.length)}
+                      aria-label="Previous image"
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow-sm flex items-center justify-center hover:bg-white transition-colors"
+                    >
+                      <ChevronLeft size={16} className="text-[#5C3D1E]" />
+                    </button>
+                    <button
+                      onClick={() => setImgIdx(i => (i + 1) % gallery.length)}
+                      aria-label="Next image"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow-sm flex items-center justify-center hover:bg-white transition-colors"
+                    >
+                      <ChevronRight size={16} className="text-[#5C3D1E]" />
+                    </button>
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                      {gallery.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setImgIdx(i)}
+                          aria-label={`Show image ${i + 1}`}
+                          className="w-1.5 h-1.5 rounded-full transition-all"
+                          style={{ background: i === imgIdx ? '#C9A84C' : 'rgba(255,255,255,0.7)', width: i === imgIdx ? '16px' : '6px' }}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 

@@ -6,7 +6,7 @@ import {
   MapPin, Zap, ArrowRight, CheckCircle2,
 } from 'lucide-react';
 import PageTransition from '../components/PageTransition';
-import heroBg from '../assets/cashew-bg.png';
+import heroBg from '../assets/cashew-bg.webp';
 
 const GREEN = '#0B5D3B';
 const GOLD  = '#D4A017';

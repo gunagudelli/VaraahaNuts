@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Search, X, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
-import { products } from '../data/products';
+import { products, categories } from '../data/products';
 import PageTransition from '../components/PageTransition';
 
 const GREEN = '#0B5D3B';
@@ -20,6 +20,7 @@ const Shop: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [search,   setSearch]   = useState(searchParams.get('search')   || '');
   const [weight,   setWeight]   = useState(searchParams.get('weight')   || '');
+  const [category, setCategory] = useState(searchParams.get('category') || '');
   const [sort,     setSort]     = useState(searchParams.get('sort')     || 'popular');
   const [page,     setPage]     = useState(1);
   const [sortOpen, setSortOpen] = useState(false);
@@ -30,18 +31,20 @@ const Shop: React.FC = () => {
 
   useEffect(() => {
     setSearch(searchParams.get('search') || '');
+    setCategory(searchParams.get('category') || '');
   }, [searchParams]);
 
   const filtered = useMemo(() => {
     let list = [...products];
     if (search) list = list.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) || p.description.toLowerCase().includes(search.toLowerCase()));
     if (weight) list = list.filter(p => p.weight === weight);
+    if (category) list = list.filter(p => p.category === category);
     if (sort === 'price-asc')  list.sort((a, b) => a.price - b.price);
     else if (sort === 'price-desc') list.sort((a, b) => b.price - a.price);
     else if (sort === 'rating')     list.sort((a, b) => b.rating - a.rating);
     else list.sort((a, b) => b.reviewCount - a.reviewCount);
     return list;
-  }, [search, weight, sort]);
+  }, [search, weight, category, sort]);
 
   const paginated = filtered.slice(0, page * perPage);
   const hasMore   = paginated.length < filtered.length;
@@ -56,11 +59,12 @@ const Shop: React.FC = () => {
   const clearAll = () => {
     setSearch('');
     setWeight('');
+    setCategory('');
     setSearchParams(new URLSearchParams());
     setPage(1);
   };
 
-  const activeCount = [search, weight].filter(Boolean).length;
+  const activeCount = [search, weight, category].filter(Boolean).length;
 
   return (
     <PageTransition>
@@ -220,23 +224,38 @@ const Shop: React.FC = () => {
 
           {/* Active filter tags */}
           <AnimatePresence>
-            {search && (
+            {(search || category) && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.22 }}
                 className="flex flex-wrap gap-2 mb-5"
               >
-                <motion.span
-                  initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.85, opacity: 0 }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-white text-xs rounded-full font-semibold"
-                  style={{ background: GREEN }}
-                >
-                  "{search}"
-                  <button onClick={() => { setSearch(''); updateFilter('search', ''); }}>
-                    <X size={11} />
-                  </button>
-                </motion.span>
+                {search && (
+                  <motion.span
+                    initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.85, opacity: 0 }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-white text-xs rounded-full font-semibold"
+                    style={{ background: GREEN }}
+                  >
+                    "{search}"
+                    <button onClick={() => { setSearch(''); updateFilter('search', ''); }}>
+                      <X size={11} />
+                    </button>
+                  </motion.span>
+                )}
+                {category && (
+                  <motion.span
+                    initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.85, opacity: 0 }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-white text-xs rounded-full font-semibold"
+                    style={{ background: GOLD }}
+                  >
+                    {categories.find(c => c.slug === category)?.name || category}
+                    <button onClick={() => { setCategory(''); updateFilter('category', ''); }}>
+                      <X size={11} />
+                    </button>
+                  </motion.span>
+                )}
               </motion.div>
             )}
           </AnimatePresence>

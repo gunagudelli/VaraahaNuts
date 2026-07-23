@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Package, ShoppingBag,
   Users, Image, LogOut, Menu, X, ChevronRight,
-  Bell, Settings, Store,
+  Bell, Settings, Store, Tags,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/WhatsApp Image 2026-06-16 at 1.36.56 PM.jpeg';
@@ -12,6 +12,7 @@ import { C } from './adminUI';
 const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard',  to: '/admin',           end: true  },
   { icon: Package,         label: 'Products',   to: '/admin/products',  end: false },
+  { icon: Tags,            label: 'Categories', to: '/admin/categories',end: false },
   { icon: ShoppingBag,     label: 'Orders',     to: '/admin/orders',    end: false },
   { icon: Users,           label: 'Customers',  to: '/admin/customers', end: false },
   { icon: Image,           label: 'Banners',    to: '/admin/banners',   end: false },

@@ -84,11 +84,11 @@ interface FieldProps {
 }
 
 const Field: React.FC<FieldProps> = ({
-  name: _name, label, type = 'text', full, placeholder,
+  name, label, type = 'text', full, placeholder,
   value, error, touched, readOnly, suffix, prefix, onChange, onBlur,
 }) => (
   <div className={full ? 'col-span-1 sm:col-span-2' : ''}>
-    <label className="block text-xs font-semibold uppercase tracking-widest text-[#888] mb-1.5">
+    <label htmlFor={name} className="block text-xs font-semibold uppercase tracking-widest text-[#888] mb-1.5">
       {label}
     </label>
     <div className="relative flex">
@@ -99,6 +99,9 @@ const Field: React.FC<FieldProps> = ({
         </div>
       )}
       <input
+        name={name}
+        id={name}
+        autoComplete={name}
         type={type}
         value={value}
         onChange={e => onChange(e.target.value)}
