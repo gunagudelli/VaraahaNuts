@@ -6,8 +6,9 @@ import {
   MapPin, Zap, ArrowRight, CheckCircle2,
 } from 'lucide-react';
 import PageTransition from '../components/PageTransition';
-import storyVideo from '../assets/14666827_1080_1920_30fps.mp4';
-import heroBg from '../assets/ChatGPT Image Jun 16, 2026, 06_41_32 PM.png';
+import LazyVideo from '../components/LazyVideo';
+import storyVideo from '../assets/cashew-loop-640.mp4';
+import heroBg from '../assets/about-hero-bg.webp';
 
 const GREEN = '#0B5D3B';
 const GOLD  = '#D4A017';
@@ -212,9 +213,7 @@ const About: React.FC = () => (
                   className="rounded-3xl overflow-hidden shadow-2xl"
                   style={{ boxShadow: `0 24px 64px ${GREEN}22` }}
                 >
-                  <video autoPlay muted loop playsInline className="w-full object-cover max-h-[440px]">
-                    <source src={storyVideo} type="video/mp4" />
-                  </video>
+                  <LazyVideo src={storyVideo} className="w-full max-h-[440px]" />
                 </motion.div>
                 {/* Floating badge */}
                 <motion.div

@@ -6,10 +6,11 @@ import { ArrowRight, Award, Truck, Star, ShieldCheck, Zap, Leaf, ChevronRight } 
 import ProductCard from '../components/ProductCard';
 import { products, testimonials } from '../data/products';
 import PageTransition from '../components/PageTransition';
+import LazyVideo from '../components/LazyVideo';
 import { WHATSAPP_URL } from '../config';
 import heroImg   from '../assets/ChatGPT Image Jun 17, 2026, 04_18_18 PM.webp';
 import bulkVideo from '../assets/WhatsApp Video 2026-06-16 at 1.37.27 PM.mp4';
-import bgVideo   from '../assets/14666827_1080_1920_30fps.mp4';
+import bgVideo   from '../assets/cashew-loop-640.mp4';
 import bsBg      from '../assets/ChatGPT Image Jun 26, 2026, 05_48_04 PM.webp';
 
 const GREEN = '#0B5D3B';
@@ -354,9 +355,7 @@ const Home: React.FC = () => {
               variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once: true }}
               className="rounded-3xl overflow-hidden shadow-2xl"
               style={{ boxShadow: `0 20px 50px ${GREEN}25` }}>
-              <video autoPlay muted loop playsInline className="w-full h-full object-cover max-h-[480px]">
-                <source src={bgVideo} type="video/mp4" />
-              </video>
+              <LazyVideo src={bgVideo} className="w-full h-full max-h-[480px]" />
             </motion.div>
           </div>
         </div>
@@ -400,7 +399,7 @@ const Home: React.FC = () => {
                 </motion.div>
               </motion.div>
               <div className="relative overflow-hidden rounded-b-3xl lg:rounded-r-3xl lg:rounded-bl-none">
-                <video src={bulkVideo} autoPlay muted loop playsInline className="w-full h-48 sm:h-64 lg:h-full object-cover lg:min-h-[320px]" />
+                <LazyVideo src={bulkVideo} className="w-full h-48 sm:h-64 lg:h-full lg:min-h-[320px]" />
                 <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#0B5D3B]/30" />
               </div>
             </div>
