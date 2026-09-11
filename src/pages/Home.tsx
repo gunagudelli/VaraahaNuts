@@ -307,7 +307,7 @@ const Home: React.FC = () => {
               </Link>
             </motion.div>
           </motion.div>
-          <div className="grid grid-cols-3 gap-5 sm:gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 sm:gap-8 max-w-3xl mx-auto">
             {(bestSellers.length ? bestSellers : featuredProducts).map((p, i) =>
               <ProductCard key={p.id} product={p} index={i} />)}
           </div>

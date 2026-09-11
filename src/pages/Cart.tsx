@@ -33,9 +33,9 @@ const Cart: React.FC = () => {
           {cart.length === 0 ? (
             <div className="text-center py-20">
               <ShoppingBag size={48} className="text-[#E8D5B0] mx-auto mb-4" />
-              <p className="text-lg font-semibold text-[#2C2416] mb-2">Your cart is empty</p>
-              <p className="text-sm text-[#7A6A56] mb-6">Discover our premium cashews and dry fruits</p>
-              <Link to="/shop" className="inline-flex items-center gap-2 px-6 py-3 bg-[#5C3D1E] text-white rounded-full font-medium text-sm hover:bg-[#C9A84C] transition-colors">
+              <p className="text-lg font-semibold text-[#1a1a1a] mb-2">Your cart is empty</p>
+              <p className="text-sm text-[#777] mb-6">Discover our premium cashews and dry fruits</p>
+              <Link to="/shop" className="inline-flex items-center gap-2 px-6 py-3 bg-[#0B5D3B] text-white rounded-full font-medium text-sm hover:bg-[#0d7a4e] transition-colors">
                 Continue Shopping <ArrowRight size={15} />
               </Link>
             </div>
@@ -57,23 +57,23 @@ const Cart: React.FC = () => {
                       </Link>
                       <div className="flex-1 min-w-0">
                         <Link to={`/product/${item.product.slug}`}>
-                          <p className="font-semibold text-sm text-[#2C2416] hover:text-[#C9A84C] transition-colors line-clamp-1">{item.product.name}</p>
+                          <p className="font-semibold text-sm text-[#1a1a1a] hover:text-[#D4A017] transition-colors line-clamp-1">{item.product.name}</p>
                         </Link>
-                        <p className="text-xs text-[#7A6A56] mt-0.5">{item.product.weight}</p>
-                        <p className="text-sm font-bold text-[#2C2416] mt-1">₹{item.product.price}</p>
+                        <p className="text-xs text-[#777] mt-0.5">{item.product.weight}</p>
+                        <p className="text-sm font-bold text-[#1a1a1a] mt-1">₹{item.product.price}</p>
                         <div className="flex items-center justify-between mt-3">
                           <div className="flex items-center border border-[#eee] rounded-full overflow-hidden">
                             <button onClick={() => updateQuantity(item.product.id, item.quantity - 1)} className="w-7 h-7 flex items-center justify-center hover:bg-[#F5EDD8] transition-colors">
-                              <Minus size={12} className="text-[#5C3D1E]" />
+                              <Minus size={12} className="text-[#0B5D3B]" />
                             </button>
-                            <span className="w-8 text-center text-xs font-semibold text-[#2C2416]">{item.quantity}</span>
+                            <span className="w-8 text-center text-xs font-semibold text-[#1a1a1a]">{item.quantity}</span>
                             <button onClick={() => updateQuantity(item.product.id, item.quantity + 1)} className="w-7 h-7 flex items-center justify-center hover:bg-[#F5EDD8] transition-colors">
-                              <Plus size={12} className="text-[#5C3D1E]" />
+                              <Plus size={12} className="text-[#0B5D3B]" />
                             </button>
                           </div>
                           <div className="flex items-center gap-3">
-                            <span className="text-sm font-bold text-[#2C2416]">₹{item.product.price * item.quantity}</span>
-                            <button onClick={() => removeFromCart(item.product.id)} className="text-[#7A6A56] hover:text-red-500 transition-colors">
+                            <span className="text-sm font-bold text-[#1a1a1a]">₹{item.product.price * item.quantity}</span>
+                            <button onClick={() => removeFromCart(item.product.id)} className="text-[#777] hover:text-red-500 transition-colors">
                               <Trash2 size={14} />
                             </button>
                           </div>
@@ -82,30 +82,30 @@ const Cart: React.FC = () => {
                     </motion.div>
                   ))}
                 </AnimatePresence>
-                <Link to="/shop" className="inline-flex items-center gap-1.5 text-sm text-[#8B5E3C] hover:text-[#C9A84C] transition-colors mt-2">
+                <Link to="/shop" className="inline-flex items-center gap-1.5 text-sm text-[#0B5D3B] hover:text-[#D4A017] transition-colors mt-2">
                   ← Continue Shopping
                 </Link>
               </div>
 
               {/* Summary */}
               <div className="bg-white rounded-2xl border border-[#eee] p-6 h-fit sticky top-20">
-                <h2 className="font-bold text-[#2C2416] mb-4">Order Summary</h2>
+                <h2 className="font-bold text-[#1a1a1a] mb-4">Order Summary</h2>
                 <div className="space-y-3 text-sm mb-4 pb-4 border-b border-[#eee]">
-                  <div className="flex justify-between text-[#5C3D1E]">
+                  <div className="flex justify-between text-[#444]">
                     <span>Subtotal ({cart.reduce((s, i) => s + i.quantity, 0)} items)</span>
                     <span>₹{cartTotal}</span>
                   </div>
-                  <div className="flex justify-between text-[#5C3D1E]">
+                  <div className="flex justify-between text-[#444]">
                     <span>Shipping</span>
                     <span className={shipping === 0 ? 'text-green-600 font-medium' : ''}>{shipping === 0 ? 'FREE' : `₹${shipping}`}</span>
                   </div>
-                  {shipping > 0 && <p className="text-xs text-[#C4956A]">Add ₹{999 - cartTotal} more for free shipping</p>}
+                  {shipping > 0 && <p className="text-xs text-[#D4A017]">Add ₹{999 - cartTotal} more for free shipping</p>}
                 </div>
-                <div className="flex justify-between font-bold text-[#2C2416] text-base mb-5">
+                <div className="flex justify-between font-bold text-[#1a1a1a] text-base mb-5">
                   <span>Total</span>
                   <span>₹{total}</span>
                 </div>
-                <Link to="/checkout" className="block w-full text-center py-3 bg-[#1C1008] text-white font-semibold rounded-lg hover:bg-[#C9872A] transition-colors text-sm">
+                <Link to="/checkout" className="block w-full text-center py-3 bg-[#0B5D3B] text-white font-semibold rounded-lg hover:bg-[#0d7a4e] transition-colors text-sm">
                   Proceed to Checkout
                 </Link>
               </div>

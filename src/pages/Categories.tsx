@@ -11,8 +11,8 @@ const Categories: React.FC = () => (
     <div className="pt-16 bg-[#FDFAF4] min-h-screen">
       <div className="bg-white border-b border-[#F0E6D3]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <p className="text-[#C9A84C] text-xs font-semibold uppercase tracking-widest mb-2">Browse</p>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#2C2416]">All Categories</h1>
+          <p className="text-[#D4A017] text-xs font-semibold uppercase tracking-widest mb-2">Browse</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a1a]">All Categories</h1>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -27,13 +27,13 @@ const Categories: React.FC = () => (
             >
               <Link to={`/shop?category=${cat.slug}`} className="group block rounded-2xl overflow-hidden relative aspect-video bg-[#F5EDD8]">
                 <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#2C2416]/75 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#071F14]/80 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between">
                   <div>
                     <p className="text-white font-semibold text-base">{cat.name}</p>
                     <p className="text-white/60 text-xs mt-0.5">{cat.productCount} products</p>
                   </div>
-                  <div className="w-9 h-9 rounded-full bg-[#C9A84C] flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-9 h-9 rounded-full bg-[#D4A017] flex items-center justify-center group-hover:scale-110 transition-transform">
                     <ArrowRight size={16} className="text-white" />
                   </div>
                 </div>

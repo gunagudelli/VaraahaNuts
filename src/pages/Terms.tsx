@@ -3,8 +3,8 @@ import PageTransition from '../components/PageTransition';
 
 const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div className="mb-8">
-    <h2 className="text-base font-semibold text-[#2C2416] mb-3">{title}</h2>
-    <div className="text-sm text-[#7A6A56] leading-relaxed space-y-2">{children}</div>
+    <h2 className="text-base font-semibold text-[#1a1a1a] mb-3">{title}</h2>
+    <div className="text-sm text-[#777] leading-relaxed space-y-2">{children}</div>
   </div>
 );
 
@@ -13,8 +13,8 @@ const Terms: React.FC = () => (
     <div className="pt-16 bg-[#FDFAF4] min-h-screen">
       <div className="bg-white border-b border-[#F0E6D3]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#2C2416]">Terms & Conditions</h1>
-          <p className="text-sm text-[#7A6A56] mt-1">Last updated: January 2025</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#1a1a1a]">Terms & Conditions</h1>
+          <p className="text-sm text-[#777] mt-1">Last updated: January 2025</p>
         </div>
       </div>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">

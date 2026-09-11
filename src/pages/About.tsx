@@ -6,7 +6,8 @@ import {
   MapPin, Zap, ArrowRight, CheckCircle2,
 } from 'lucide-react';
 import PageTransition from '../components/PageTransition';
-import heroBg from '../assets/cashew-bg.webp';
+import storyVideo from '../assets/14666827_1080_1920_30fps.mp4';
+import heroBg from '../assets/ChatGPT Image Jun 16, 2026, 06_41_32 PM.png';
 
 const GREEN = '#0B5D3B';
 const GOLD  = '#D4A017';
@@ -80,7 +81,7 @@ const About: React.FC = () => (
           backgroundRepeat: 'no-repeat',
         }}
       >
-        <div className="absolute inset-0" style={{ background: 'rgba(7,31,20,0.72)' }} />
+        <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${GREEN}e6 0%, #071F14e6 100%)` }} />
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-10 blur-3xl" style={{ background: GOLD }} />
           <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-8 blur-3xl" style={{ background: '#fff' }} />
@@ -212,7 +213,7 @@ const About: React.FC = () => (
                   style={{ boxShadow: `0 24px 64px ${GREEN}22` }}
                 >
                   <video autoPlay muted loop playsInline className="w-full object-cover max-h-[440px]">
-                    <source src="https://media.istockphoto.com/id/2236689844/video/rotating-ripe-cashew-apples-nuts-with-shell-attached-drupe-with-edible-seed.mp4?s=mp4-640x640-is&k=20&c=owtpU-WIRAIboanoFx41xSKhHSPXonmtR82YaLdVrko=" type="video/mp4" />
+                    <source src={storyVideo} type="video/mp4" />
                   </video>
                 </motion.div>
                 {/* Floating badge */}

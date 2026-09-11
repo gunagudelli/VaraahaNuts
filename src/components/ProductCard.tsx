@@ -140,7 +140,7 @@ const ProductCard: React.FC<Props> = ({ product, index = 0 }) => {
         <div className="flex items-center justify-between mt-auto pt-2 border-t" style={{ borderColor: '#F0E8DC' }}>
           <div className="flex flex-col">
             <span className="text-sm font-extrabold" style={{ color: GREEN }}>₹{product.price}</span>
-            {product.originalPrice && (
+            {discount > 0 && (
               <span className="text-[10px] text-[#bbb] line-through">₹{product.originalPrice}</span>
             )}
           </div>

@@ -16,31 +16,31 @@ import LABEL_IMG    from '../assets/3rd image.webp';
 
 export const products: Product[] = [
 
-  // ── Avarage Wmix Cashews ──
+  // ── Average Wmix Cashews ──
   {
-    id: '1', name: 'Avarage Wmix Cashews — 1kg', slug: 'wmix-cashews-1kg',
+    id: '1', name: 'Average Wmix Cashews — 1kg', slug: 'wmix-cashews-1kg',
     category: 'wmix-cashews', price: 760, originalPrice: 800, weight: '1kg',
     image: IMG_WMIX, images: [NEW_1KG, IMG_WMIX, LABEL_IMG],
     rating: 4.5, reviewCount: 98, inStock: true, isFeatured: true, isBestSeller: true,
-    description: 'Premium quality Avarage Wmix Cashews with rich taste and natural freshness. Ideal for daily snacking, sweets, and cooking.',
+    description: 'Premium quality Average Wmix Cashews with rich taste and natural freshness. Ideal for daily snacking, sweets, and cooking.',
     benefits: ['Rich Taste', 'Natural Fresh', 'Daily Snacking', 'FSSAI Certified'],
     tags: ['wmix'],
   },
   {
-    id: '2', name: 'Avarage Wmix Cashews — 500g', slug: 'wmix-cashews-500g',
+    id: '2', name: 'Average Wmix Cashews — 500g', slug: 'wmix-cashews-500g',
     category: 'wmix-cashews', price: 380, originalPrice: 400, weight: '500g',
     image: IMG_WMIX, images: [NEW_500, IMG_WMIX, LABEL_IMG],
     rating: 4.5, reviewCount: 74, inStock: true,
-    description: 'Premium quality Avarage Wmix Cashews with rich taste and natural freshness. Ideal for daily snacking, sweets, and cooking.',
+    description: 'Premium quality Average Wmix Cashews with rich taste and natural freshness. Ideal for daily snacking, sweets, and cooking.',
     benefits: ['Rich Taste', 'Natural Fresh', 'Daily Snacking', 'FSSAI Certified'],
     tags: ['wmix'],
   },
   {
-    id: '3', name: 'Avarage Wmix Cashews — 250g', slug: 'wmix-cashews-250g',
+    id: '3', name: 'Average Wmix Cashews — 250g', slug: 'wmix-cashews-250g',
     category: 'wmix-cashews', price: 200, originalPrice: 250, weight: '250g',
     image: IMG_WMIX, images: [NEW_250, IMG_WMIX, LABEL_IMG],
     rating: 4.5, reviewCount: 52, inStock: true,
-    description: 'Premium quality Avarage Wmix Cashews with rich taste and natural freshness. Ideal for daily snacking, sweets, and cooking.',
+    description: 'Premium quality Average Wmix Cashews with rich taste and natural freshness. Ideal for daily snacking, sweets, and cooking.',
     benefits: ['Rich Taste', 'Natural Fresh', 'Daily Snacking', 'FSSAI Certified'],
     tags: ['wmix'],
   },

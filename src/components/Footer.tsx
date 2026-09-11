@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { PHONE_NUMBER, PHONE_DISPLAY, WHATSAPP_URL, EMAIL } from '../config';
 import newLogo from '../assets/Jun 19, 2026, 03_55_08 PM.webp';
-import footerBg from '../assets/cashew-bg.webp';
+import footerBg from '../assets/ChatGPT Image Jun 26, 2026, 05_48_04 PM.webp';
 
 const GREEN = '#0B5D3B';
 const GOLD  = '#D4A017';
@@ -41,8 +41,16 @@ const FooterLink: React.FC<{ to: string; children: React.ReactNode }> = ({ to, c
 );
 
 const Footer: React.FC = () => (
-  <footer className="relative overflow-hidden" style={{ background: '#071F14', backgroundImage: `url(${footerBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-    <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(7,31,20,0.88)' }} />
+  <footer
+    className="relative overflow-hidden"
+    style={{
+      background: '#071F14',
+      backgroundImage: `url(${footerBg})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }}
+  >
+    <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(7,31,20,0.85)' }} />
     {/* Subtle top gradient */}
     <div
       className="absolute inset-x-0 top-0 h-px"
