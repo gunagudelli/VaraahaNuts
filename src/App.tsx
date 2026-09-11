@@ -43,8 +43,10 @@ const StorefrontLayout: React.FC<{ children: React.ReactNode }> = ({ children })
 );
 
 const ScrollToTop: React.FC = () => {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const { pathname, search } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname, search]);
   return null;
 };
 
