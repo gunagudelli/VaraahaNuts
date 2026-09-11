@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Heart, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -26,14 +26,6 @@ const ProductCard: React.FC<Props> = ({ product, index = 0 }) => {
   const discount   = product.originalPrice
     ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
   const [added, setAdded] = useState(false);
-  const [imgIdx, setImgIdx] = useState(0);
-  const images = product.images && product.images.length > 1 ? product.images : null;
-
-  useEffect(() => {
-    if (!images) return;
-    const t = setInterval(() => setImgIdx(i => (i + 1) % images.length), 1800);
-    return () => clearInterval(t);
-  }, [images]);
 
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -64,19 +56,12 @@ const ProductCard: React.FC<Props> = ({ product, index = 0 }) => {
         style={{ background: IMG_BG_COLORS[index % IMG_BG_COLORS.length], aspectRatio: '4/3' }}
       >
         <Link to={`/product/${product.slug}`}>
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={imgIdx}
-              src={images ? images[imgIdx] : product.image}
-              alt={product.name}
-              className="w-full h-full object-cover"
-              loading="lazy"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-            />
-          </AnimatePresence>
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
         </Link>
 
         {/* Wishlist — only thing inside image area */}

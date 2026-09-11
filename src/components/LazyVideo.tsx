@@ -7,25 +7,37 @@ interface Props {
 }
 
 const LazyVideo: React.FC<Props> = ({ src, className, style }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [everMounted, setEverMounted] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (inView || !ref.current) return;
+    if (!wrapperRef.current) return;
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true); },
+      ([entry]) => {
+        setVisible(entry.isIntersecting);
+        if (entry.isIntersecting) setEverMounted(true);
+      },
       { rootMargin: '300px' }
     );
-    observer.observe(ref.current);
+    observer.observe(wrapperRef.current);
     return () => observer.disconnect();
-  }, [inView]);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (visible) video.play().catch(() => {});
+    else video.pause();
+  }, [visible]);
 
   return (
-    <div ref={ref} className={className} style={style}>
-      {inView && (
+    <div ref={wrapperRef} className={className} style={style}>
+      {everMounted && (
         <video
+          ref={videoRef}
           src={src}
-          autoPlay
           muted
           loop
           playsInline
