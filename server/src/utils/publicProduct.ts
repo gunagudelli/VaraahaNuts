@@ -17,6 +17,7 @@ export interface PublicProduct {
   inStock: boolean;
   isBestSeller?: boolean;
   isFeatured?: boolean;
+  isActive?: boolean;
   tags?: string[];
 }
 
@@ -38,6 +39,7 @@ export function toPublicProduct(row: ProductRow): PublicProduct {
     inStock: row.in_stock,
     isBestSeller: row.is_best_seller,
     isFeatured: row.is_featured,
+    isActive: row.is_active,
     tags: row.tags,
   };
 }

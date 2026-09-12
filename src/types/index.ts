@@ -15,6 +15,7 @@ export interface Product {
   inStock: boolean;
   isBestSeller?: boolean;
   isFeatured?: boolean;
+  isActive?: boolean;
   tags?: string[];
 }
 
@@ -50,4 +51,10 @@ export interface Category {
   slug: string;
   image: string;
   productCount: number;
+}
+
+export interface Banner {
+  id: string;
+  image: string;
+  linkUrl?: string;
 }

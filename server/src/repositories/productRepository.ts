@@ -19,6 +19,7 @@ export interface ProductRow {
   in_stock: boolean;
   is_featured: boolean;
   is_best_seller: boolean;
+  is_active: boolean;
   created_at: Date;
   updated_at: Date;
 }
@@ -30,6 +31,9 @@ export interface ListProductsFilters {
   sort: "popular" | "price-asc" | "price-desc" | "rating";
   featured?: boolean;
   bestSeller?: boolean;
+  // Storefront listings never pass this (only ever see active products);
+  // the admin UI passes true to manage everything, inactive included.
+  includeInactive?: boolean;
 }
 
 const BASE_SELECT = `
@@ -69,6 +73,9 @@ export async function listProducts(filters: ListProductsFilters): Promise<Produc
     values.push(filters.bestSeller);
     conditions.push(`p.is_best_seller = $${values.length}`);
   }
+  if (!filters.includeInactive) {
+    conditions.push(`p.is_active = true`);
+  }
 
   const where = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
   const orderBy = SORT_CLAUSE[filters.sort];
@@ -104,18 +111,19 @@ export interface ProductWriteParams {
   inStock: boolean;
   isFeatured: boolean;
   isBestSeller: boolean;
+  isActive: boolean;
 }
 
 export async function createProduct(p: ProductWriteParams): Promise<ProductRow> {
   const { rows } = await pool.query<{ id: string }>(
     `INSERT INTO products
        (name, slug, category_id, price, original_price, weight, image, images,
-        rating, review_count, description, benefits, tags, in_stock, is_featured, is_best_seller)
-     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)
+        rating, review_count, description, benefits, tags, in_stock, is_featured, is_best_seller, is_active)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17)
      RETURNING id`,
     [
       p.name, p.slug, p.categoryId, p.price, p.originalPrice, p.weight, p.image, p.images,
-      p.rating, p.reviewCount, p.description, p.benefits, p.tags, p.inStock, p.isFeatured, p.isBestSeller,
+      p.rating, p.reviewCount, p.description, p.benefits, p.tags, p.inStock, p.isFeatured, p.isBestSeller, p.isActive,
     ]
   );
   return (await findProductById(rows[0].id))!;
@@ -143,11 +151,12 @@ export async function updateProduct(id: string, p: ProductWriteParams): Promise<
        tags = $14,
        in_stock = $15,
        is_featured = $16,
-       is_best_seller = $17
+       is_best_seller = $17,
+       is_active = $18
      WHERE id = $1`,
     [
       id, p.name, p.slug, p.categoryId, p.price, p.originalPrice, p.weight, p.image, p.images,
-      p.rating, p.reviewCount, p.description, p.benefits, p.tags, p.inStock, p.isFeatured, p.isBestSeller,
+      p.rating, p.reviewCount, p.description, p.benefits, p.tags, p.inStock, p.isFeatured, p.isBestSeller, p.isActive,
     ]
   );
   return findProductById(id);

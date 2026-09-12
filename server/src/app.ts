@@ -9,6 +9,7 @@ import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 import productRoutes from "./routes/productRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import adminAuthRoutes from "./routes/adminAuthRoutes.js";
+import bannerRoutes from "./routes/bannerRoutes.js";
 
 export const app = express();
 
@@ -40,6 +41,7 @@ app.get("/api/health", (_req, res) => {
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/admin/auth", adminAuthRoutes);
+app.use("/api/banners", bannerRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

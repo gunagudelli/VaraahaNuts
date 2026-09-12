@@ -1,4 +1,4 @@
-import type { Product, Category } from '../types';
+import type { Product, Category, Banner } from '../types';
 
 // Relative path: the Vite dev server proxies /api to the local backend
 // (see vite.config.ts), and in production both are served from the same
@@ -45,4 +45,13 @@ export function fetchCategories(): Promise<Category[]> {
     categoriesCache.catch(() => { categoriesCache = null; });
   }
   return categoriesCache;
+}
+
+export async function fetchActiveBanner(): Promise<Banner | null> {
+  try {
+    const data = await getJson<{ banner: Banner | null }>('/banners/active');
+    return data.banner;
+  } catch {
+    return null;
+  }
 }

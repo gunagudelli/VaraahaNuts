@@ -12,7 +12,7 @@ import { findCategoryBySlug } from "../repositories/categoryRepository.js";
 import { toPublicProduct, PublicProduct } from "../utils/publicProduct.js";
 import { CreateProductInput, UpdateProductInput, ListProductsQuery } from "../validators/productValidators.js";
 
-export async function listProducts(query: ListProductsQuery): Promise<PublicProduct[]> {
+export async function listProducts(query: ListProductsQuery, isAdmin: boolean): Promise<PublicProduct[]> {
   const rows = await listProductsRepo({
     categorySlug: query.category,
     weight: query.weight,
@@ -20,13 +20,16 @@ export async function listProducts(query: ListProductsQuery): Promise<PublicProd
     sort: query.sort,
     featured: query.featured,
     bestSeller: query.bestSeller,
+    includeInactive: isAdmin,
   });
   return rows.map(toPublicProduct);
 }
 
-export async function getProductBySlug(slug: string): Promise<PublicProduct> {
+export async function getProductBySlug(slug: string, isAdmin: boolean): Promise<PublicProduct> {
   const row = await findProductBySlug(slug);
-  if (!row) {
+  // Inactive products are 404 for everyone except the admin UI, which
+  // needs to be able to load them again to flip is_active back on.
+  if (!row || (!row.is_active && !isAdmin)) {
     throw new HttpError(404, "Product not found");
   }
   return toPublicProduct(row);
@@ -68,6 +71,7 @@ export async function createProductEntry(input: CreateProductInput): Promise<Pub
     inStock: input.inStock,
     isFeatured: input.isFeatured,
     isBestSeller: input.isBestSeller,
+    isActive: input.isActive,
   });
   return toPublicProduct(row);
 }
@@ -103,6 +107,7 @@ export async function updateProductEntry(id: string, input: UpdateProductInput):
     inStock: input.inStock ?? existing.in_stock,
     isFeatured: input.isFeatured ?? existing.is_featured,
     isBestSeller: input.isBestSeller ?? existing.is_best_seller,
+    isActive: input.isActive ?? existing.is_active,
   };
 
   const row = await updateProductRepo(id, merged);

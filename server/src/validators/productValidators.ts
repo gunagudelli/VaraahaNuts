@@ -42,6 +42,7 @@ export const createProductSchema = z.object({
   inStock: z.boolean().optional().default(true),
   isFeatured: z.boolean().optional().default(false),
   isBestSeller: z.boolean().optional().default(false),
+  isActive: z.boolean().optional().default(true),
 });
 
 export type CreateProductInput = z.infer<typeof createProductSchema>;
