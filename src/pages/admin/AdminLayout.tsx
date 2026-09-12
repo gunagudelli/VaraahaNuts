@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import {
-  LayoutDashboard, Package, ShoppingBag,
-  Users, Image, LogOut, Menu, X, ChevronRight,
-  Bell, Settings, Store, Tags,
+  LayoutDashboard, Package, Image, LogOut, Menu, X, ChevronRight,
+  Store, Tags,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '../../assets/WhatsApp Image 2026-06-16 at 1.36.56 PM.jpeg';
+import { useAdminAuth } from '../../context/AdminAuthContext';
 import { C } from './adminUI';
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard',  to: '/admin',           end: true  },
   { icon: Package,         label: 'Products',   to: '/admin/products',  end: false },
   { icon: Tags,            label: 'Categories', to: '/admin/categories',end: false },
-  { icon: ShoppingBag,     label: 'Orders',     to: '/admin/orders',    end: false },
-  { icon: Users,           label: 'Customers',  to: '/admin/customers', end: false },
-  { icon: Image,           label: 'Banners',    to: '/admin/banners',   end: false },
+  { icon: Image,           label: 'Banner',     to: '/admin/banners',   end: false },
 ];
 
 const SidebarContent: React.FC<{ close?: () => void }> = ({ close }) => {
   const navigate = useNavigate();
+  const { logout } = useAdminAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/admin/login', { replace: true });
+  };
+
   return (
     <div className="flex flex-col h-full">
       {/* Logo */}
@@ -107,20 +112,21 @@ const SidebarContent: React.FC<{ close?: () => void }> = ({ close }) => {
           whileHover={{ backgroundColor: 'rgba(255,255,255,0.07)', x: 3 }}
           whileTap={{ scale: 0.97 }}
           transition={{ type: 'spring', stiffness: 300 }}
+          onClick={() => navigate('/')}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-white/50 hover:text-white/90 transition-colors"
           style={{ border: '1px solid transparent' }}
         >
-          <Settings size={15} /> Settings
+          <Store size={15} /> View Storefront
         </motion.button>
         <motion.button
           whileHover={{ backgroundColor: 'rgba(255,255,255,0.07)', x: 3 }}
           whileTap={{ scale: 0.97 }}
           transition={{ type: 'spring', stiffness: 300 }}
-          onClick={() => navigate('/')}
+          onClick={handleLogout}
           className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-white/50 hover:text-white/90 transition-colors"
           style={{ border: '1px solid transparent' }}
         >
-          <LogOut size={15} /> Exit Admin
+          <LogOut size={15} /> Logout
         </motion.button>
       </div>
     </div>
@@ -129,6 +135,7 @@ const SidebarContent: React.FC<{ close?: () => void }> = ({ close }) => {
 
 const AdminLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { adminEmail } = useAdminAuth();
 
   return (
     <div className="min-h-screen flex" style={{ background: C.bg }}>
@@ -199,25 +206,7 @@ const AdminLayout: React.FC = () => {
             <span className="font-semibold" style={{ color: C.text }}>Admin</span>
           </div>
 
-          <div className="ml-auto flex items-center gap-2">
-            {/* Notifications */}
-            <motion.button
-              whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.93 }}
-              className="relative p-2 rounded-xl transition-colors"
-              style={{ color: C.textSub }}
-            >
-              <Bell size={16} />
-              <motion.span
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ repeat: Infinity, duration: 2.5 }}
-                className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full"
-                style={{ background: C.gold }}
-              />
-            </motion.button>
-
-            {/* Divider */}
-            <div className="w-px h-5 mx-1" style={{ background: C.border }} />
-
+          <div className="ml-auto flex items-center gap-2.5">
             {/* Avatar */}
             <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2.5 cursor-default">
               <div
@@ -226,9 +215,9 @@ const AdminLayout: React.FC = () => {
               >
                 <img src={logo} alt="Admin" className="w-full h-full object-cover" />
               </div>
-              <div className="hidden sm:block">
-                <p className="text-xs font-semibold leading-none" style={{ color: C.text }}>Admin</p>
-                <p className="text-[10px] mt-0.5" style={{ color: C.textMuted }}>Super User</p>
+              <div className="hidden sm:block max-w-[160px]">
+                <p className="text-xs font-semibold leading-none truncate" style={{ color: C.text }}>{adminEmail || 'Admin'}</p>
+                <p className="text-[10px] mt-0.5" style={{ color: C.textMuted }}>Store Admin</p>
               </div>
             </motion.div>
           </div>

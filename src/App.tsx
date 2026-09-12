@@ -20,12 +20,12 @@ const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
+const RequireAdminAuth = lazy(() => import('./pages/admin/RequireAdminAuth'));
 const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 const AdminProducts = lazy(() => import('./pages/admin/AdminProducts'));
 const AdminCategories = lazy(() => import('./pages/admin/AdminCategories'));
-const AdminOrders = lazy(() => import('./pages/admin/AdminOrders'));
-const AdminCustomers = lazy(() => import('./pages/admin/AdminCustomers'));
 const AdminBanners = lazy(() => import('./pages/admin/AdminBanners'));
 
 const RouteFallback: React.FC = () => (
@@ -61,13 +61,14 @@ const App: React.FC = () => {
       <AnimatePresence mode="wait">
       {isAdmin ? (
         <Routes location={location} key="admin">
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<AdminDashboard />} />
-            <Route path="products" element={<AdminProducts />} />
-            <Route path="categories" element={<AdminCategories />} />
-            <Route path="orders" element={<AdminOrders />} />
-            <Route path="customers" element={<AdminCustomers />} />
-            <Route path="banners" element={<AdminBanners />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route element={<RequireAdminAuth />}>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="categories" element={<AdminCategories />} />
+              <Route path="banners" element={<AdminBanners />} />
+            </Route>
           </Route>
         </Routes>
       ) : (

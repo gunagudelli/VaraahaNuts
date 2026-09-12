@@ -1,140 +1,125 @@
-import React, { useState } from 'react';
-import { Plus, Edit2, Trash2, Image } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { C, Reveal, PageHeader, PrimaryBtn, IconBtn } from './adminUI';
-
-const initialBanners = [
-  { id: '1', title: 'Premium Cashews — Farm Fresh',   subtitle: 'Shop the finest W240 grade cashews',      image: '/p1.jpg',  active: true,  cta: 'Shop Now'  },
-  { id: '2', title: 'Gift Boxes for Every Occasion',  subtitle: 'Luxury cashew gift boxes — from ₹999',    image: '/p2.jpg',  active: true,  cta: 'View Gifts'},
-  { id: '3', title: 'Bulk Orders Welcome',            subtitle: 'Special pricing for 10kg+ orders',        image: '/p11.jpg', active: false, cta: 'Get Quote' },
-];
-
-/* ── Toggle switch ── */
-const Toggle: React.FC<{ on: boolean; onToggle: () => void }> = ({ on, onToggle }) => (
-  <motion.button
-    onClick={onToggle}
-    whileTap={{ scale: 0.92 }}
-    className="relative w-11 h-6 rounded-full transition-colors shrink-0"
-    style={{ background: on ? C.green : '#D1C4B4' }}
-  >
-    <motion.div
-      animate={{ x: on ? 20 : 2 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-      className="absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm"
-    />
-  </motion.button>
-);
+import React, { useEffect, useState } from 'react';
+import { Image as ImageIcon, Trash2, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
+import type { Banner } from '../../types';
+import { adminGetBanner, adminSetBanner, adminRemoveBanner, AdminApiError } from '../../lib/adminApi';
+import { C, Reveal, PageHeader, PrimaryBtn, FormField } from './adminUI';
 
 const AdminBanners: React.FC = () => {
-  const [banners, setBanners] = useState(initialBanners);
+  const [banner, setBanner] = useState<Banner | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [image, setImage] = useState('');
+  const [linkUrl, setLinkUrl] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const toggle = (id: string) => setBanners(prev => prev.map(b => b.id === id ? { ...b, active: !b.active } : b));
-  const remove = (id: string) => setBanners(prev => prev.filter(b => b.id !== id));
+  const load = () => {
+    setLoading(true);
+    adminGetBanner()
+      .then((b) => {
+        setBanner(b);
+        setImage(b?.image || '');
+        setLinkUrl(b?.linkUrl || '');
+      })
+      .finally(() => setLoading(false));
+  };
+  useEffect(load, []);
+
+  const handleSave = async () => {
+    if (!image.trim()) {
+      setError('Image URL is required.');
+      return;
+    }
+    setSaving(true);
+    setError(null);
+    try {
+      const updated = await adminSetBanner({ image: image.trim(), linkUrl: linkUrl.trim() || undefined });
+      setBanner(updated);
+    } catch (err) {
+      setError(err instanceof AdminApiError ? err.message : 'Failed to save banner');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleRemove = async () => {
+    if (!window.confirm('Remove the current banner? It will disappear from the storefront immediately.')) return;
+    await adminRemoveBanner();
+    setBanner(null);
+    setImage('');
+    setLinkUrl('');
+  };
 
   return (
     <div>
       <PageHeader
-        title="Banner Management"
-        sub={`${banners.length} banners · ${banners.filter(b => b.active).length} active`}
-        action={
-          <PrimaryBtn>
-            <Plus size={15} /> Add Banner
-          </PrimaryBtn>
-        }
+        title="Festival Banner"
+        sub={banner ? 'Currently live on your homepage' : 'Nothing is showing right now'}
       />
 
-      <div className="space-y-3">
-        <AnimatePresence>
-          {banners.map((banner, i) => (
-            <Reveal key={banner.id} delay={i * 0.08}>
-              <motion.div
-                layout
-                exit={{ opacity: 0, x: 40, scale: 0.97 }}
-                whileHover={{ boxShadow: '0 10px 32px rgba(0,0,0,0.07)' }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-                className="bg-white rounded-2xl border flex gap-0 overflow-hidden"
-                style={{ borderColor: banner.active ? C.gold + '30' : C.border }}
-              >
-                {/* Active indicator strip */}
-                <div
-                  className="w-1 shrink-0 transition-colors duration-300"
-                  style={{ background: banner.active ? C.green : '#DDD5C8' }}
-                />
-
-                {/* Image */}
-                <div className="w-28 shrink-0 overflow-hidden relative" style={{ minHeight: 80 }}>
-                  <motion.div
-                    className="w-full h-full"
-                    whileHover={{ scale: 1.06 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <img
-                      src={banner.image} alt={banner.title}
-                      className="w-full h-full object-cover"
-                      style={{ background: C.goldLight, minHeight: 80 }}
-                    />
-                  </motion.div>
-                  {!banner.active && (
-                    <div className="absolute inset-0 bg-white/60 flex items-center justify-center">
-                      <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Inactive</span>
-                    </div>
+      {loading ? (
+        <p className="text-sm" style={{ color: C.textSub }}>Loading…</p>
+      ) : (
+        <div className="grid lg:grid-cols-2 gap-5">
+          {/* Current state preview */}
+          <Reveal>
+            <div className="bg-white rounded-2xl border p-5" style={{ borderColor: C.border }}>
+              <p className="text-sm font-bold mb-3" style={{ color: C.text }}>Live Preview</p>
+              {banner ? (
+                <>
+                  <img src={banner.image} alt="Current banner" className="w-full rounded-xl object-cover" />
+                  {banner.linkUrl && (
+                    <p className="flex items-center gap-1.5 text-xs mt-3" style={{ color: C.textSub }}>
+                      <ExternalLink size={12} /> Links to: <span className="font-medium" style={{ color: C.text }}>{banner.linkUrl}</span>
+                    </p>
                   )}
+                  <motion.button
+                    whileHover={{ backgroundColor: '#FEE2E2' }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={handleRemove}
+                    className="mt-4 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium border transition-colors"
+                    style={{ borderColor: '#FCA5A5', color: C.red }}
+                  >
+                    <Trash2 size={14} /> Remove Banner
+                  </motion.button>
+                </>
+              ) : (
+                <div
+                  className="rounded-xl border border-dashed py-16 flex flex-col items-center justify-center"
+                  style={{ borderColor: C.border }}
+                >
+                  <ImageIcon size={32} className="opacity-20 mb-2" style={{ color: C.primary }} />
+                  <p className="text-sm font-medium" style={{ color: C.textMuted }}>No banner active</p>
+                  <p className="text-xs mt-1" style={{ color: C.textMuted }}>Set one using the form →</p>
                 </div>
+              )}
+            </div>
+          </Reveal>
 
-                {/* Content */}
-                <div className="flex-1 px-4 py-4 min-w-0">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <p className="text-sm font-semibold truncate" style={{ color: C.text }}>{banner.title}</p>
-                      <p className="text-xs mt-0.5 truncate" style={{ color: C.textSub }}>{banner.subtitle}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 mt-2.5 flex-wrap">
-                    <span
-                      className="text-[10px] font-semibold px-2.5 py-1 rounded-full"
-                      style={{ background: C.goldLight, color: C.primary }}
-                    >
-                      CTA: {banner.cta}
-                    </span>
-                    <motion.span
-                      animate={{ opacity: [1, 0.7, 1] }}
-                      transition={banner.active ? { repeat: Infinity, duration: 2.5 } : {}}
-                      className="text-[10px] font-semibold px-2.5 py-1 rounded-full"
-                      style={banner.active
-                        ? { background: C.green + '18', color: C.green }
-                        : { background: '#F0EBE4', color: C.textMuted }
-                      }
-                    >
-                      {banner.active ? '● Active' : '○ Inactive'}
-                    </motion.span>
-                  </div>
-                </div>
+          {/* Set / replace form */}
+          <Reveal delay={0.08}>
+            <div className="bg-white rounded-2xl border p-5" style={{ borderColor: C.border }}>
+              <p className="text-sm font-bold mb-1" style={{ color: C.text }}>{banner ? 'Replace Banner' : 'Set a Banner'}</p>
+              <p className="text-xs mb-4" style={{ color: C.textSub }}>
+                Upload your festival/sale image somewhere and paste its URL here. Leave the link field empty if it shouldn't be clickable.
+              </p>
 
-                {/* Actions */}
-                <div className="flex flex-col items-center justify-center gap-2 px-4 border-l" style={{ borderColor: C.border }}>
-                  <Toggle on={banner.active} onToggle={() => toggle(banner.id)} />
-                  <div className="flex gap-1">
-                    <IconBtn><Edit2 size={13} /></IconBtn>
-                    <IconBtn onClick={() => remove(banner.id)} danger><Trash2 size={13} /></IconBtn>
-                  </div>
-                </div>
-              </motion.div>
-            </Reveal>
-          ))}
-        </AnimatePresence>
+              {error && (
+                <div className="mb-4 px-3.5 py-2.5 rounded-xl text-xs font-medium bg-red-50 text-red-600 border border-red-100">{error}</div>
+              )}
 
-        {banners.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            className="bg-white rounded-2xl border py-16 flex flex-col items-center"
-            style={{ borderColor: C.border }}
-          >
-            <Image size={36} className="opacity-20 mb-3" style={{ color: C.primary }} />
-            <p className="text-sm font-medium" style={{ color: C.textMuted }}>No banners yet</p>
-            <p className="text-xs mt-1" style={{ color: C.textMuted }}>Click "Add Banner" to create your first one</p>
-          </motion.div>
-        )}
-      </div>
+              <div className="space-y-4">
+                <FormField label="Image URL" value={image} onChange={setImage} />
+                <FormField label="Link URL (optional)" value={linkUrl} onChange={setLinkUrl} />
+              </div>
+
+              <PrimaryBtn onClick={handleSave} className="mt-5 justify-center w-full" disabled={saving}>
+                {saving ? 'Saving…' : banner ? 'Update Banner' : 'Set Banner'}
+              </PrimaryBtn>
+            </div>
+          </Reveal>
+        </div>
+      )}
     </div>
   );
 };
