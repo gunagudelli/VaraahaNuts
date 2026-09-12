@@ -1,9 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Star, ShoppingCart, Heart, ChevronRight, ChevronLeft, Plus, Minus, Check, Truck, Shield, RefreshCw } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { products } from '../data/products';
+import { fetchProducts } from '../lib/api';
+import type { Product } from '../types';
 import { useStore } from '../context/StoreContext';
 import ProductCard from '../components/ProductCard';
 import PageTransition from '../components/PageTransition';
@@ -11,13 +12,28 @@ import PageTransition from '../components/PageTransition';
 const ProductDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const product = products.find(p => p.slug === slug);
   const { addToCart, addToWishlist, removeFromWishlist, isInWishlist } = useStore();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const [imgIdx, setImgIdx] = useState(0);
+
+  useEffect(() => {
+    fetchProducts().then(setProducts).catch(() => {}).finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => { setImgIdx(0); }, [slug]);
+
+  const product = products.find(p => p.slug === slug);
   const inWishlist = product ? isInWishlist(product.id) : false;
   const gallery = product?.images && product.images.length > 0 ? product.images : product ? [product.image] : [];
+
+  if (loading) return (
+    <div className="pt-24 text-center py-20">
+      <p className="text-sm text-[#777]">Loading product...</p>
+    </div>
+  );
 
   if (!product) return (
     <div className="pt-24 text-center py-20">

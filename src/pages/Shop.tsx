@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { Search, X, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
-import { products, categories } from '../data/products';
+import { fetchProducts, fetchCategories } from '../lib/api';
+import type { Product, Category } from '../types';
 import PageTransition from '../components/PageTransition';
 
 const GREEN = '#0B5D3B';
@@ -26,6 +27,11 @@ const Shop: React.FC = () => {
   const [sortOpen, setSortOpen] = useState(false);
   const perPage = 8;
 
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const heroRef = useRef(null);
   const heroInView = useInView(heroRef, { once: true });
 
@@ -33,6 +39,13 @@ const Shop: React.FC = () => {
     setSearch(searchParams.get('search') || '');
     setCategory(searchParams.get('category') || '');
   }, [searchParams]);
+
+  useEffect(() => {
+    Promise.all([fetchProducts(), fetchCategories()])
+      .then(([p, c]) => { setProducts(p); setCategories(c); })
+      .catch(() => setError('Could not load products. Please try again.'))
+      .finally(() => setLoading(false));
+  }, []);
 
   const filtered = useMemo(() => {
     let list = [...products];
@@ -44,7 +57,7 @@ const Shop: React.FC = () => {
     else if (sort === 'rating')     list.sort((a, b) => b.rating - a.rating);
     else list.sort((a, b) => b.reviewCount - a.reviewCount);
     return list;
-  }, [search, weight, category, sort]);
+  }, [products, search, weight, category, sort]);
 
   const paginated = filtered.slice(0, page * perPage);
   const hasMore   = paginated.length < filtered.length;
@@ -261,6 +274,9 @@ const Shop: React.FC = () => {
           </AnimatePresence>
 
           {/* ── Product Grid ── */}
+          {loading && <p className="text-center text-sm text-[#777] py-24">Loading products...</p>}
+          {error && <p className="text-center text-sm text-red-600 py-24">{error}</p>}
+          {!loading && !error && (
           <AnimatePresence mode="wait">
             {filtered.length === 0 ? (
               <motion.div
@@ -324,6 +340,7 @@ const Shop: React.FC = () => {
               </motion.div>
             )}
           </AnimatePresence>
+          )}
 
         </div>
       </div>

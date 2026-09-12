@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { categories } from '../data/products';
+import { fetchCategories } from '../lib/api';
 import type { Category } from '../types/index';
 import PageTransition from '../components/PageTransition';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
-const Categories: React.FC = () => (
+const Categories: React.FC = () => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchCategories()
+      .then(setCategories)
+      .catch(() => setError('Could not load categories. Please try again.'))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return (
   <PageTransition>
     <div className="pt-16 bg-[#FDFAF4] min-h-screen">
       <div className="bg-white border-b border-[#F0E6D3]">
@@ -16,6 +28,9 @@ const Categories: React.FC = () => (
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {loading && <p className="text-center text-sm text-[#777] py-10">Loading categories...</p>}
+        {error && <p className="text-center text-sm text-red-600 py-10">{error}</p>}
+        {!loading && !error && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((cat: Category, i: number) => (
             <motion.div
@@ -41,9 +56,11 @@ const Categories: React.FC = () => (
             </motion.div>
           ))}
         </div>
+        )}
       </div>
     </div>
   </PageTransition>
-);
+  );
+};
 
 export default Categories;

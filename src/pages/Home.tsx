@@ -4,7 +4,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { ArrowRight, Award, Truck, Star, ShieldCheck, Zap, Leaf, ChevronRight } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import { products, testimonials } from '../data/products';
+import { testimonials } from '../data/products';
+import { fetchProducts } from '../lib/api';
+import type { Product } from '../types';
 import PageTransition from '../components/PageTransition';
 import LazyVideo from '../components/LazyVideo';
 import { WHATSAPP_URL } from '../config';
@@ -113,6 +115,12 @@ const TestimonialsCarousel: React.FC = () => {
 };
 
 const Home: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    fetchProducts().then(setProducts).catch(() => {});
+  }, []);
+
   const featuredProducts = products.filter(p => p.isFeatured);
   const bestSellers = products.filter(p =>
     ['wmix-cashews-1kg', 'wmix-cashews-500g', 'wmix-cashews-250g'].includes(p.slug)
