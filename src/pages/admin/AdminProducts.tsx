@@ -8,6 +8,7 @@ import {
   SearchInput, StatusBadge, TableWrap, THead, TRow,
   FormField, Modal,
 } from './adminUI';
+import ImageUploadField from './ImageUploadField';
 
 interface ProductFormState {
   id?: string;
@@ -287,7 +288,7 @@ const AdminProducts: React.FC = () => {
                 </div>
                 <FormField label="Weight (e.g. 1kg)" value={form.weight} onChange={(v) => setForm((f) => ({ ...f, weight: v }))} />
 
-                <FormField label="Main Image URL" value={form.image} onChange={(v) => setForm((f) => ({ ...f, image: v }))} />
+                <ImageUploadField label="Main Image" value={form.image} onChange={(v) => setForm((f) => ({ ...f, image: v }))} folder="products" />
                 <FormField label="Gallery Image URLs (one per line, optional)" value={form.images} onChange={(v) => setForm((f) => ({ ...f, images: v }))} rows={3} />
 
                 <div className="grid grid-cols-2 gap-3">

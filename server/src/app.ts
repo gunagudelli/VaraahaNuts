@@ -10,6 +10,7 @@ import productRoutes from "./routes/productRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import adminAuthRoutes from "./routes/adminAuthRoutes.js";
 import bannerRoutes from "./routes/bannerRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 
 export const app = express();
 
@@ -42,6 +43,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/admin/auth", adminAuthRoutes);
 app.use("/api/banners", bannerRoutes);
+app.use("/api/uploads", uploadRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

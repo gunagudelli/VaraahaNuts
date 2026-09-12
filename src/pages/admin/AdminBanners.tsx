@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import type { Banner } from '../../types';
 import { adminGetBanner, adminSetBanner, adminRemoveBanner, AdminApiError } from '../../lib/adminApi';
 import { C, Reveal, PageHeader, PrimaryBtn, FormField } from './adminUI';
+import ImageUploadField from './ImageUploadField';
 
 const AdminBanners: React.FC = () => {
   const [banner, setBanner] = useState<Banner | null>(null);
@@ -109,7 +110,7 @@ const AdminBanners: React.FC = () => {
               )}
 
               <div className="space-y-4">
-                <FormField label="Image URL" value={image} onChange={setImage} />
+                <ImageUploadField label="Banner Image" value={image} onChange={setImage} folder="banners" />
                 <FormField label="Link URL (optional)" value={linkUrl} onChange={setLinkUrl} />
               </div>
 

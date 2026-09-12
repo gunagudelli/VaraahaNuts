@@ -66,3 +66,22 @@ export const adminSetBanner = (body: { image: string; linkUrl?: string }) =>
 
 export const adminRemoveBanner = () =>
   adminFetch<void>('/banners', { method: 'DELETE' });
+
+// Image upload (banner/product/category photos) -> Supabase Storage, returns a public URL.
+export async function adminUploadImage(file: File, folder: 'banners' | 'products' | 'categories'): Promise<string> {
+  const token = getAdminToken();
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const res = await fetch(`${API_BASE}/uploads?folder=${folder}`, {
+    method: 'POST',
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    body: formData,
+  });
+
+  const data = await res.json().catch(() => null);
+  if (!res.ok) {
+    throw new AdminApiError(res.status, data?.error || `Upload failed: ${res.status}`);
+  }
+  return data.url as string;
+}

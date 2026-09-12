@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import type { Category } from '../../types';
 import { adminListCategories, adminCreateCategory, adminUpdateCategory, adminDeleteCategory, AdminApiError } from '../../lib/adminApi';
 import { C, Reveal, PageHeader, PrimaryBtn, IconBtn, FormField, Modal } from './adminUI';
+import ImageUploadField from './ImageUploadField';
 
 interface FormState { id?: string; name: string; slug: string; image: string }
 const emptyForm: FormState = { name: '', slug: '', image: '' };
@@ -138,7 +139,7 @@ const AdminCategories: React.FC = () => {
               <div className="space-y-4">
                 <FormField label="Category Name" value={form.name} onChange={(v) => setForm((f) => ({ ...f, name: v, slug: f.id ? f.slug : slugify(v) }))} />
                 <FormField label="Slug (URL)" value={form.slug} onChange={(v) => setForm((f) => ({ ...f, slug: slugify(v) }))} />
-                <FormField label="Image URL" value={form.image} onChange={(v) => setForm((f) => ({ ...f, image: v }))} />
+                <ImageUploadField label="Category Image" value={form.image} onChange={(v) => setForm((f) => ({ ...f, image: v }))} folder="categories" />
               </div>
 
               <div className="flex gap-3 mt-6">

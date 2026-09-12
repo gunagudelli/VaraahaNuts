@@ -18,6 +18,10 @@ const envSchema = z.object({
   // that's the Vite dev server; in production it's the same Vercel domain
   // this API is deployed alongside.
   PUBLIC_BASE_URL: z.string().default("http://localhost:5183"),
+
+  // Supabase Storage - used for admin image uploads (banner/product/category photos).
+  SUPABASE_URL: z.string().min(1, "SUPABASE_URL is required"),
+  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1, "SUPABASE_SERVICE_ROLE_KEY is required"),
 });
 
 const parsed = envSchema.safeParse(process.env);
