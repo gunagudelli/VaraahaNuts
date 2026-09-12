@@ -10,7 +10,8 @@ import type { Product } from '../types';
 import PageTransition from '../components/PageTransition';
 import LazyVideo from '../components/LazyVideo';
 import { WHATSAPP_URL } from '../config';
-import PromoBanner from '../components/PromoBanner';
+import { fetchActiveBanner } from '../lib/api';
+import type { Banner } from '../types';
 import heroImg   from '../assets/ChatGPT Image Jun 17, 2026, 04_18_18 PM.webp';
 import bulkVideo from '../assets/WhatsApp Video 2026-06-16 at 1.37.27 PM.mp4';
 import bgVideo   from '../assets/cashew-loop-640.mp4';
@@ -117,9 +118,11 @@ const TestimonialsCarousel: React.FC = () => {
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [banner, setBanner] = useState<Banner | null>(null);
 
   useEffect(() => {
     fetchProducts().then(setProducts).catch(() => {});
+    fetchActiveBanner().then(setBanner).catch(() => {});
   }, []);
 
   const featuredProducts = products.filter(p => p.isFeatured);
@@ -194,16 +197,56 @@ const Home: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Right — parallax image */}
+        {/* Right — parallax image (swaps to the festival banner when one is set) */}
         <div className="relative min-h-[260px] lg:min-h-[580px] overflow-hidden">
-          <motion.img
-            src={heroImg} alt="Varaaha Premium Cashews"
-            className="absolute inset-0 w-full h-full object-contain object-center"
-            style={{ background: '#F5EBDD', y: heroImgY }}
-            initial={{ opacity: 0, scale: 1.08 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-          />
+          {banner ? (
+            banner.linkUrl ? (
+              banner.linkUrl.startsWith('/') ? (
+                <Link to={banner.linkUrl} className="absolute inset-0">
+                  <motion.img
+                    key={banner.id}
+                    src={banner.image} alt="Special offer"
+                    className="absolute inset-0 w-full h-full object-contain object-center"
+                    style={{ background: '#F5EBDD', y: heroImgY }}
+                    initial={{ opacity: 0, scale: 1.08 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, ease: 'easeOut' }}
+                  />
+                </Link>
+              ) : (
+                <a href={banner.linkUrl} target="_blank" rel="noreferrer" className="absolute inset-0">
+                  <motion.img
+                    key={banner.id}
+                    src={banner.image} alt="Special offer"
+                    className="absolute inset-0 w-full h-full object-contain object-center"
+                    style={{ background: '#F5EBDD', y: heroImgY }}
+                    initial={{ opacity: 0, scale: 1.08 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1, ease: 'easeOut' }}
+                  />
+                </a>
+              )
+            ) : (
+              <motion.img
+                key={banner.id}
+                src={banner.image} alt="Special offer"
+                className="absolute inset-0 w-full h-full object-contain object-center"
+                style={{ background: '#F5EBDD', y: heroImgY }}
+                initial={{ opacity: 0, scale: 1.08 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1, ease: 'easeOut' }}
+              />
+            )
+          ) : (
+            <motion.img
+              src={heroImg} alt="Varaaha Premium Cashews"
+              className="absolute inset-0 w-full h-full object-contain object-center"
+              style={{ background: '#F5EBDD', y: heroImgY }}
+              initial={{ opacity: 0, scale: 1.08 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease: 'easeOut' }}
+            />
+          )}
         </div>
       </section>
 
@@ -240,8 +283,6 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-
-      <PromoBanner />
 
       {/* ── Best Sellers ─────────────────────────────────────── */}
       <section className="py-12 sm:py-20 relative overflow-hidden" style={{ background: `linear-gradient(160deg, #FDFAF4 0%, #F5EBDD 60%, #FDFAF4 100%)`, backgroundImage: `url(${bsBg})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
