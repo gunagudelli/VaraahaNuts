@@ -1,4 +1,4 @@
-import argon2 from "argon2";
+import bcrypt from "bcryptjs";
 import { env } from "../config/env.js";
 import { HttpError } from "../middleware/errorHandler.js";
 import { signProductAdminToken } from "./tokenService.js";
@@ -10,7 +10,7 @@ export async function loginProductAdmin(email: string, password: string): Promis
     throw new HttpError(401, "Incorrect email or password");
   }
 
-  const valid = await argon2.verify(env.PRODUCT_ADMIN_PASSWORD_HASH, password).catch(() => false);
+  const valid = await bcrypt.compare(password, env.PRODUCT_ADMIN_PASSWORD_HASH).catch(() => false);
   if (!valid) {
     throw new HttpError(401, "Incorrect email or password");
   }
