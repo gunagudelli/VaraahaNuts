@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
-import * as productService from "../services/productService";
-import { HttpError } from "../middleware/errorHandler";
-import { listProductsQuerySchema } from "../validators/productValidators";
+import * as productService from "../services/productService.js";
+import { HttpError } from "../middleware/errorHandler.js";
+import { listProductsQuerySchema } from "../validators/productValidators.js";
 
 export const listProducts: RequestHandler = async (req, res, next) => {
   try {

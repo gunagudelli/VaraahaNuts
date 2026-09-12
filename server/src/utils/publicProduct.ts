@@ -1,4 +1,4 @@
-import { ProductRow } from "../repositories/productRepository";
+import { ProductRow } from "../repositories/productRepository.js";
 
 export interface PublicProduct {
   id: string;

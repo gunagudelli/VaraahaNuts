@@ -1,4 +1,4 @@
-import { CategoryWithCountRow, CategoryRow } from "../repositories/categoryRepository";
+import { CategoryWithCountRow, CategoryRow } from "../repositories/categoryRepository.js";
 
 export interface PublicCategory {
   id: string;

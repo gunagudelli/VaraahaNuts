@@ -1,7 +1,7 @@
 import argon2 from "argon2";
-import { env } from "../config/env";
-import { HttpError } from "../middleware/errorHandler";
-import { signProductAdminToken } from "./tokenService";
+import { env } from "../config/env.js";
+import { HttpError } from "../middleware/errorHandler.js";
+import { signProductAdminToken } from "./tokenService.js";
 
 export async function loginProductAdmin(email: string, password: string): Promise<{ accessToken: string }> {
   // Same generic error for unknown email vs wrong password - this is a

@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import * as categoryService from "../services/categoryService";
+import * as categoryService from "../services/categoryService.js";
 
 export const listCategories: RequestHandler = async (_req, res, next) => {
   try {

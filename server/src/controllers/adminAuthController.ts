@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
-import * as adminAuthService from "../services/adminAuthService";
-import { adminLoginSchema } from "../validators/adminValidators";
-import { HttpError } from "../middleware/errorHandler";
+import * as adminAuthService from "../services/adminAuthService.js";
+import { adminLoginSchema } from "../validators/adminValidators.js";
+import { HttpError } from "../middleware/errorHandler.js";
 
 export const login: RequestHandler = async (req, res, next) => {
   try {

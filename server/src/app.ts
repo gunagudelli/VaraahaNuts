@@ -3,12 +3,12 @@ import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import pinoHttp from "pino-http";
-import { env } from "./config/env";
-import { logger } from "./utils/logger";
-import { errorHandler, notFoundHandler } from "./middleware/errorHandler";
-import productRoutes from "./routes/productRoutes";
-import categoryRoutes from "./routes/categoryRoutes";
-import adminAuthRoutes from "./routes/adminAuthRoutes";
+import { env } from "./config/env.js";
+import { logger } from "./utils/logger.js";
+import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
+import productRoutes from "./routes/productRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
+import adminAuthRoutes from "./routes/adminAuthRoutes.js";
 
 export const app = express();
 

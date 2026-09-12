@@ -2,10 +2,10 @@
 // data into the database. Safe to re-run - it upserts on slug rather than
 // blindly inserting duplicates.
 import "dotenv/config";
-import { pool } from "../config/db";
-import { logger } from "../utils/logger";
+import { pool } from "../config/db.js";
+import { logger } from "../utils/logger.js";
 
-import { env } from "../config/env";
+import { env } from "../config/env.js";
 
 const IMG_BASE = `${env.PUBLIC_BASE_URL}/products`;
 

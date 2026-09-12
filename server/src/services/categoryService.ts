@@ -1,4 +1,4 @@
-import { HttpError } from "../middleware/errorHandler";
+import { HttpError } from "../middleware/errorHandler.js";
 import {
   listCategoriesWithCounts,
   findCategoryById,
@@ -7,9 +7,9 @@ import {
   updateCategory,
   deleteCategoryById,
   countProductsInCategory,
-} from "../repositories/categoryRepository";
-import { toPublicCategory, PublicCategory } from "../utils/publicCategory";
-import { CreateCategoryInput, UpdateCategoryInput } from "../validators/categoryValidators";
+} from "../repositories/categoryRepository.js";
+import { toPublicCategory, PublicCategory } from "../utils/publicCategory.js";
+import { CreateCategoryInput, UpdateCategoryInput } from "../validators/categoryValidators.js";
 
 export async function listCategories(): Promise<PublicCategory[]> {
   const rows = await listCategoriesWithCounts();

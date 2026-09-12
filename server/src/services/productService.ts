@@ -1,4 +1,4 @@
-import { HttpError } from "../middleware/errorHandler";
+import { HttpError } from "../middleware/errorHandler.js";
 import {
   listProducts as listProductsRepo,
   findProductBySlug,
@@ -7,10 +7,10 @@ import {
   updateProduct as updateProductRepo,
   deleteProductById,
   ProductWriteParams,
-} from "../repositories/productRepository";
-import { findCategoryBySlug } from "../repositories/categoryRepository";
-import { toPublicProduct, PublicProduct } from "../utils/publicProduct";
-import { CreateProductInput, UpdateProductInput, ListProductsQuery } from "../validators/productValidators";
+} from "../repositories/productRepository.js";
+import { findCategoryBySlug } from "../repositories/categoryRepository.js";
+import { toPublicProduct, PublicProduct } from "../utils/publicProduct.js";
+import { CreateProductInput, UpdateProductInput, ListProductsQuery } from "../validators/productValidators.js";
 
 export async function listProducts(query: ListProductsQuery): Promise<PublicProduct[]> {
   const rows = await listProductsRepo({
