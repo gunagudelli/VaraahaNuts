@@ -14,6 +14,11 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 
 export const app = express();
 
+// Kill switch — flip to false and redeploy to restore service.
+// Set true 2026-09-17: client withholding payment, storefront + admin
+// panel both suspended until resolved.
+const SERVICE_PAUSED = true;
+
 app.use(helmet());
 app.use(
   cors({
@@ -34,6 +39,12 @@ app.use(generalLimiter);
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
+
+if (SERVICE_PAUSED) {
+  app.use("/api", (_req, res) => {
+    res.status(402).json({ error: "Service suspended." });
+  });
+}
 
 // Product images live in this same repo's /public/products - served
 // directly by Vite (dev) / Vercel's static hosting (prod) at /products/<file>,
