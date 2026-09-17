@@ -14,10 +14,9 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 
 export const app = express();
 
-// Kill switch — flip to false and redeploy to restore service.
-// Set true 2026-09-17: client withholding payment, storefront + admin
-// panel both suspended until resolved.
-const SERVICE_PAUSED = true;
+// Kill switch — flip to true and redeploy to suspend service.
+// Set false 2026-09-17: payment resolved, service restored.
+const SERVICE_PAUSED = false;
 
 app.use(helmet());
 app.use(
